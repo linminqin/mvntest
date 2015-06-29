@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 公共 -->
+<mapper namespace="common">
+	
+	<!-- 添加 -->
+	<insert id="add" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		insert into
+		${tableName}
+		<foreach collection="columns" index="index" item="column" open="(" separator="," close=")"> 
+			${column} 
+		</foreach> 
+		values
+		<foreach collection="values" index="index" item="value" open="(" separator="," close=")"> 
+		       	#{value} 
+		 </foreach> 
+	</insert>
+
+	<!-- 修改 -->
+    <update id="updateByParams">
+   		update ${tableName} set
+   		<foreach collection="updateValue.keys" item="k" separator=","> 
+		   	${k} = #{updateValue[${k}]}
+		</foreach> 
+		<if test="null != condition">  
+			<where>
+				<foreach collection="condition.keys" item="k" separator="and"> 
+					<choose>
+						<when test="null != condition[k]">
+							${k} = #{condition[${k}]}  
+						</when>
+						<otherwise>
+							${k} is null
+						</otherwise>
+					</choose>
+				</foreach> 
+			</where>
+		</if>
+    </update>
+    
+    <update id="updateByFilters">
+   		update ${tableName} set
+   		<foreach collection="updateValue.keys" item="k" separator=","> 
+		   	${k} = #{updateValue[${k}]}
+		</foreach> 
+		<trim prefix="where">
+			<include refid="common.propertiesCondition" />
+		</trim>
+    </update>
+     
+    <!-- 删除 -->
+    <delete id="delete" parameterType="string">
+    	delete from ${tableName}
+    	<trim prefix="where">
+    		<include refid="common.propertiesCondition"/>
+    	</trim>
+    </delete>
+    
+    <!-- 根据ID批量删除 -->
+    <delete id="batchDeleteByIds">
+    	delete from ${tableName}
+    	<if test="ids != null and ids.length > 0">
+    		where id in
+	    	<foreach collection="ids" index="index" item="item" open="(" separator="," close=")"> 
+		       	#{item} 
+		    </foreach> 
+	    </if>
+    </delete>
+    
+    <!-- 过滤条件 -->
+    <sql id="propertiesCondition">
+    	<if test="_parameter.containsKey('filters') and filters != null and filters.size > 0">
+        	<foreach collection="filters" item="filter" separator=" and ">
+				<choose>
+					<when test="filter.compareType.value == 'eq'">
+						${filter.propertyName} = #{filter.propertyValue}
+					</when>
+					<when test="filter.compareType.value == 'ne'">
+						${filter.propertyName} != #{filter.propertyValue}
+					</when>
+					<when test="filter.compareType.value == 'gt'">
+						${filter.propertyName} > #{filter.propertyValue}
+					</when>
+					<when test="filter.compareType.value == 'ge'">
+						${filter.propertyName} >= #{filter.propertyValue}
+					</when>
+					<when test="filter.compareType.value == 'lt'">
+						<![CDATA[ ${filter.propertyName} < #{filter.propertyValue} ]]>
+					</when>
+					<when test="filter.compareType.value == 'le'">
+						<![CDATA[ ${filter.propertyName} <= #{filter.propertyValue} ]]>
+					</when>
+					<when test="filter.compareType.value == 'like'">
+						${filter.propertyName} like '%${filter.propertyValue}%'
+					</when>
+					<when test="filter.compareType.value == 'llike'">
+						${filter.propertyName} like '${filter.propertyValue}%'
+					</when>
+					<when test="filter.compareType.value == 'rlike'">
+						${filter.propertyName} like '%${filter.propertyValue}'
+					</when>
+					<when test="filter.compareType.value == 'nlike'">
+						${filter.propertyName} not like '${filter.propertyValue}%'
+					</when>
+					<when test="filter.compareType.value == 'nllike'">
+						${filter.propertyName} not like '${filter.propertyValue}%'
+					</when>
+					<when test="filter.compareType.value == 'nrlike'">
+						${filter.propertyName} not like '%${filter.propertyValue}'
+					</when>
+					<when test="filter.compareType.value == 'nnull'">
+						${filter.propertyName} is not null
+					</when>
+					<when test="filter.compareType.value == 'null'">
+						${filter.propertyName} is null
+					</when>
+					<otherwise>
+						${filter.propertyName} = #{filter.propertyValue}
+					</otherwise>
+				</choose>
+			</foreach>
+		</if>
+    </sql>
+    
+    <!-- 过滤条件-带别名 -->
+    <sql id="aliasPropertiesCondition">
+    	<if test="_parameter.containsKey('filters') and filters != null and filters.size > 0">
+        	<foreach collection="filters" item="filter" separator=" and ">
+        		<if test="filter.propertyName.indexOf('.') == -1">${filter.classAlias}.</if>
+				<choose>
+					<when test="filter.compareType.value == 'eq'">
+						${filter.propertyName} = #{filter.propertyValue}
+					</when>
+					<when test="filter.compareType.value == 'ne'">
+						${filter.propertyName} != #{filter.propertyValue}
+					</when>
+					<when test="filter.compareType.value == 'gt'">
+						${filter.propertyName} > #{filter.propertyValue}
+					</when>
+					<when test="filter.compareType.value == 'ge'">
+						${filter.propertyName} >= #{filter.propertyValue}
+					</when>
+					<when test="filter.compareType.value == 'lt'">
+						<![CDATA[ ${filter.propertyName} < #{filter.propertyValue} ]]>
+					</when>
+					<when test="filter.compareType.value == 'le'">
+						<![CDATA[ ${filter.propertyName} <= #{filter.propertyValue} ]]>
+					</when>
+					<when test="filter.compareType.value == 'like'">
+						${filter.propertyName} like '%${filter.propertyValue}%'
+					</when>
+					<when test="filter.compareType.value == 'llike'">
+						${filter.propertyName} like '${filter.propertyValue}%'
+					</when>
+					<when test="filter.compareType.value == 'rlike'">
+						${filter.propertyName} like '%${filter.propertyValue}'
+					</when>
+					<when test="filter.compareType.value == 'nlike'">
+						${filter.propertyName} not like '${filter.propertyValue}%'
+					</when>
+					<when test="filter.compareType.value == 'nllike'">
+						${filter.propertyName} not like '${filter.propertyValue}%'
+					</when>
+					<when test="filter.compareType.value == 'nrlike'">
+						${filter.propertyName} not like '%${filter.propertyValue}'
+					</when>
+					<when test="filter.compareType.value == 'nnull'">
+						${filter.propertyName} is not null
+					</when>
+					<when test="filter.compareType.value == 'null'">
+						${filter.propertyName} is null
+					</when>
+					<otherwise>
+						${filter.propertyName} = #{filter.propertyValue}
+					</otherwise>
+				</choose>
+			</foreach>
+		</if>
+    </sql>
+    
+    <!-- 排序 -->
+    <sql id="sortCondition">
+    	<if test="_parameter.containsKey('sorts') and sorts != null and sorts.size > 0">
+	    	order by
+	        <foreach collection="sorts" item="sort" separator=",">
+					${sort.classAlias}.${sort.propertyName} ${sort.sortType}
+			</foreach>
+		</if>
+    </sql>
+    
+    <sql id="simpleSortCondition">
+    	<if test="_parameter.containsKey('sorts') and sorts != null and sorts.size > 0">
+	        <foreach collection="sorts" item="sort" separator=",">
+					${sort.classAlias}.${sort.propertyName} ${sort.sortType}
+			</foreach>
+		</if>
+    </sql>
+    
+    <!-- 分页 -->
+    <sql id="pageCondition">
+    	<trim prefix="limit" prefixOverrides=",">  
+            <if test="pageFirst != null">#{pageFirst}</if>  
+            <if test="pageSize != null">,#{pageSize}</if>  
+    	</trim> 
+    </sql>
+     
+     <select id="count" resultType="java.lang.Integer">
+     	select count(*) from ${tableName} ${tableAlias}
+     	<trim prefix="where">
+    		<include refid="common.aliasPropertiesCondition"/>
+    	</trim>
+     </select>
+</mapper>
