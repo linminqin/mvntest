@@ -8,8 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.lmiky.admin.database.pojo.BasePojo;
-import com.lmiky.jdp.user.pojo.Operator;
+import com.lmiky.platform.database.pojo.BasePojo;
 
 /**
  * 角色

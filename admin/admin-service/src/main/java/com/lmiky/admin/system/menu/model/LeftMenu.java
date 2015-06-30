@@ -2,10 +2,6 @@ package com.lmiky.admin.system.menu.model;
 
 import java.util.List;
 
-import com.lmiky.jdp.system.menu.model.Menu;
-import com.lmiky.jdp.system.menu.model.SubMenu;
-import com.lmiky.jdp.system.menu.model.TopMenu;
-
 /**
  * 左菜单菜单
  * @author lmiky

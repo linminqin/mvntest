@@ -22,11 +22,6 @@
 		<!-- admin -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>admin-common</artifactId>
-			<version>0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
 			<artifactId>admin-service</artifactId>
 			<version>0.1</version>
 		</dependency>

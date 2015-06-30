@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-import com.lmiky.admin.database.pojo.BasePojo;
+import com.lmiky.platform.database.pojo.BasePojo;
 
 /**
  * 人员

@@ -2,9 +2,8 @@ package com.lmiky.admin.user.service;
 
 import java.util.List;
 
-import com.lmiky.admin.service.exception.ServiceException;
 import com.lmiky.admin.user.pojo.Role;
-import com.lmiky.jdp.user.service.UserService;
+import com.lmiky.platform.service.exception.ServiceException;
 
 /**
  * 

@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import com.lmiky.admin.database.pojo.BasePojo;
+import com.lmiky.platform.database.pojo.BasePojo;
 
 /**
  * 我的收藏菜单

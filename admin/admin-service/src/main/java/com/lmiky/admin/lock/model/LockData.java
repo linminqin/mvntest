@@ -1,6 +1,6 @@
 package com.lmiky.admin.lock.model;
 
-import com.lmiky.admin.cache.model.CacheData;
+import com.lmiky.platform.cache.model.CacheData;
 
 /**
  * 加锁数据

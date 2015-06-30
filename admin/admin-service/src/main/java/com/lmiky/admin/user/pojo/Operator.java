@@ -11,9 +11,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import com.lmiky.jdp.user.pojo.Role;
-import com.lmiky.jdp.user.pojo.User;
-
 /**
  * 操作员
  * @author lmiky

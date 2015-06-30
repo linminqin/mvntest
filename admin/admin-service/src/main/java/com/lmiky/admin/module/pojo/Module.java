@@ -12,9 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
-import com.lmiky.admin.database.pojo.BasePojo;
-import com.lmiky.jdp.module.pojo.Function;
-import com.lmiky.jdp.module.pojo.ModuleGroup;
+import com.lmiky.platform.database.pojo.BasePojo;
 
 /**
  * 模块

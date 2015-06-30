@@ -16,9 +16,9 @@ import com.lmiky.platform.controller.BaseApiController;
 import com.lmiky.platform.controller.view.BaseCodeDataListView;
 import com.lmiky.platform.controller.view.BaseCodeView;
 import com.lmiky.platform.controller.view.BaseJsonView;
-import com.lmiky.platform.logger.pojo.Logger;
 import com.lmiky.platform.logger.util.LoggerUtils;
 import com.lmiky.platform.service.BaseService;
+import com.lmiky.platform.tree.pojo.BaseTreePojo;
 import com.lmiky.platform.util.Environment;
 import com.lmiky.platform.util.IPUtils;
 
@@ -71,7 +71,7 @@ public class TestApiController extends BaseApiController {
 	public String testList(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		try {
 			LoggerUtils.info(String.format("IP[%s]进入到测试接口中", IPUtils.getRealIP(request)));
-			List<Logger> loggers = baseService.list(Logger.class);
+			List<BaseTreePojo> loggers = baseService.list(BaseTreePojo.class);
 			Map<String, Object> data = new HashMap<>();
 			data.put("loggers", loggers);
 			modelMap.put(BaseCodeDataListView.KEY_NAME_DATA, data);

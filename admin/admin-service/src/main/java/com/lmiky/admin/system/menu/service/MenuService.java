@@ -2,8 +2,8 @@ package com.lmiky.admin.system.menu.service;
 
 import java.util.List;
 
-import com.lmiky.admin.service.BaseService;
-import com.lmiky.admin.service.exception.ServiceException;
+import com.lmiky.platform.service.BaseService;
+import com.lmiky.platform.service.exception.ServiceException;
 
 /**
  * @author lmiky

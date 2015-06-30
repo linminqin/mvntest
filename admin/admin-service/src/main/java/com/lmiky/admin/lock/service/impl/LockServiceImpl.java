@@ -1,11 +1,11 @@
 package com.lmiky.admin.lock.service.impl;
 
-import com.lmiky.admin.cache.CacheFactory;
-import com.lmiky.admin.cache.exception.CacheException;
-import com.lmiky.admin.cache.model.ObjectCache;
 import com.lmiky.admin.lock.exception.LockException;
 import com.lmiky.admin.lock.model.LockData;
 import com.lmiky.admin.lock.service.LockService;
+import com.lmiky.platform.cache.CacheFactory;
+import com.lmiky.platform.cache.exception.CacheException;
+import com.lmiky.platform.cache.model.ObjectCache;
 
 /**
  * 锁
@@ -33,7 +33,7 @@ public class LockServiceImpl implements LockService {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.lmiky.jdp.lock.service.LockService#lock(java.lang.String, java.lang.Long, java.lang.String)
+	 * @see com.lmiky.admin.lock.service.LockService#lock(java.lang.String, java.lang.Long, java.lang.String)
 	 */
 	public void lock(String lockTarget, Long userId, String userName) throws LockException {
 		synchronized (mutex) {
@@ -58,7 +58,7 @@ public class LockServiceImpl implements LockService {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.lmiky.jdp.lock.service.LockService#unlock(java.lang.String, java.lang.Long)
+	 * @see com.lmiky.admin.lock.service.LockService#unlock(java.lang.String, java.lang.Long)
 	 */
 	public void unlock(String lockTarget, Long userId) throws LockException {
 		synchronized (mutex) {
@@ -78,7 +78,7 @@ public class LockServiceImpl implements LockService {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.lmiky.jdp.lock.service.LockService#isLock(java.lang.String)
+	 * @see com.lmiky.admin.lock.service.LockService#isLock(java.lang.String)
 	 */
 	public boolean isLock(String lockTarget) throws LockException {
 		synchronized (mutex) {
@@ -98,7 +98,7 @@ public class LockServiceImpl implements LockService {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.lmiky.jdp.lock.service.LockService#isLockByUser(java.lang.String, java.lang.Long)
+	 * @see com.lmiky.admin.lock.service.LockService#isLockByUser(java.lang.String, java.lang.Long)
 	 */
 	public boolean isLockByUser(String lockTarget, Long userId) throws LockException {
 		synchronized (mutex) {

@@ -8,8 +8,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-import com.lmiky.jdp.user.pojo.Person;
-
 /**
  * 用户
  * @author lmiky

@@ -1,6 +1,6 @@
 package com.lmiky.admin.sso.model;
 
-import com.lmiky.admin.cache.model.CacheData;
+import com.lmiky.platform.cache.model.CacheData;
 
 /**
  * 登入信息

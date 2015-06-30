@@ -4,7 +4,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.lmiky.platform.constants.Constants;
-import com.lmiky.platform.util.BundleUtils;
 
 /**
  * 日志工具
@@ -12,10 +11,8 @@ import com.lmiky.platform.util.BundleUtils;
  * @date 2013-5-10
  */
 public class LoggerUtils {
-	private static final String CONFIGNAME_PREFIX_OPETYPE = "opeType_";
-	private static final String CONFIGNAME_PREFIX_POJONAME= "opePojo_";
 	private static int exceptionStackLogNum = Constants.SYSTEM_EXCEPTION_STACKLOGNUM;
-	private static final Log log = LogFactory.getLog("com.lmiky");
+	private static final Log log = LogFactory.getLog("com");
 
 	/**
 	 * @author lmiky
@@ -233,38 +230,5 @@ public class LoggerUtils {
 		// 记录异常对象
 		error(e.getMessage());
 		detailLogException(e);
-	}
-
-	
-	/**
-	 * 获取操作动作名称
-	 * @author lmiky
-	 * @date 2014-7-16
-	 * @param opeType
-	 * @return
-	 */
-	public static String getOpeName(String opeType) {
-		try {
-			return BundleUtils.getStringValue(Constants.PROPERTIES_KEY_OPERATENAME_FILE, CONFIGNAME_PREFIX_OPETYPE + opeType);
-		} catch(Exception e) {
-			logException(e);
-			return "";
-		}
-	}
-	
-	/**
-	 * 获取操作对象名称
-	 * @author lmiky
-	 * @date 2014-7-16
-	 * @param pojoClassName
-	 * @return
-	 */
-	public static String getPojoName(String pojoClassName) {
-		try {
-			return BundleUtils.getStringValue(Constants.PROPERTIES_KEY_OPERATENAME_FILE, CONFIGNAME_PREFIX_POJONAME + pojoClassName);
-		} catch(Exception e) {
-			logException(e);
-			return "";
-		}
 	}
 }

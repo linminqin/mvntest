@@ -1,7 +1,5 @@
 package com.lmiky.admin.system.menu.model;
 
-import com.lmiky.jdp.system.menu.model.LeftMenu;
-import com.lmiky.jdp.system.menu.model.Menu;
 
 /**
  * 子菜单菜单

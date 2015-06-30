@@ -28,7 +28,7 @@ public class ModuleParserImpl implements ModuleParser {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.lmiky.jdp.init.parser.ModuleParser#parse()
+	 * @see com.lmiky.admin.init.parser.ModuleParser#parse()
 	 */
 	@SuppressWarnings("rawtypes")
 	public List<ModuleGroup> parse() throws ParseException {

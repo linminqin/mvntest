@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.markany.gameboss.player.pojo.Player">
+	<resultMap type="Player" id="basePlayer" extends="com.lmiky.jdp.database.pojo.BasePojo.basePojo">
+		<result column="code" property="code"/>
+		<result column="region" property="region"/>
+		<result column="operator" property="operator"/>
+		<result column="activateTime" property="activateTime"/>
+		<result column="lastActiveTime" property="lastActiveTime"/>
+	</resultMap>
+	
+	<resultMap type="Player" id="player" extends="com.markany.gameboss.player.pojo.Player.basePlayer">
+		<association column="region" property="city" select="com.lmiky.area.pojo.City.findByCode"/>
+	</resultMap>
+
+	<sql id="tableName">
+		t_player
+	</sql>
+	<sql id="tableAlias">
+		Player
+	</sql>
+
+	<select id="find" resultMap="player">
+		select * from 
+		<include refid="tableName"/> <include refid="tableAlias" />
+		<trim prefix="where">
+			<include refid="common.aliasPropertiesCondition"/>
+		</trim>
+	</select>
+	
+	<select id="findById" resultMap="player">
+		select * from 
+		<include refid="tableName"/>
+		where id = #{id}
+	</select>
+	
+	<select id="findByCode" resultMap="player">
+		select * from 
+		<include refid="tableName"/>
+		where code = #{code}
+	</select>
+	
+	<select id="list" resultMap="player">
+		select * from
+		<include refid="tableName" /> <include refid="tableAlias" />
+		<trim prefix="where">
+			<include refid="common.aliasPropertiesCondition" />
+		</trim>
+		<include refid="common.sortCondition" />
+		<include refid="common.pageCondition" />
+	</select>
+	
+	<!-- 获取有变更的玩家最新的区域 -->
+	<select id="listPlayerChangedRegion" resultType="java.util.HashMap">
+		<![CDATA[
+			select playerCode, region 
+		  	from
+		    (select playerCode, region, count(*) c 
+		    	from t_player_online_list 
+		    	where loginTime >= date_sub(now(), interval ${dayRange} day) and region is not null 
+		    		group by playerCode, region 
+		    		order by c desc
+		    ) t 
+		  	group by playerCode 
+		  	having region <> (select region from t_player p where p.code = playerCode)
+	  	]]>
+	</select>
+
+	<insert id="add" parameterType="Player" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		insert into
+		<include refid="tableName" />
+		(
+			 id
+			,activateTime
+			,code
+			,lastActiveTime
+			,operator
+			,region
+		)
+		values
+		(
+			 #{id}
+			,#{activateTime}
+			,#{code}
+			,#{lastActiveTime}
+			,#{operator}
+			,#{region}
+		)
+	</insert>
+	
+	<update id="update" parameterType="Player">
+		update <include refid="tableName" /> 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="activateTime != null">activateTime=#{activateTime},</if>
+			<if test="code != null">code=#{code},</if>
+			<if test="lastActiveTime != null">lastActiveTime=#{lastActiveTime},</if>
+			<if test="operator != null">operator=#{operator},</if>
+			<if test="region != null">region=#{region},</if>
+		</trim>
+		where id=#{id}
+	</update>
+</mapper>

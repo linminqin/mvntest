@@ -10,17 +10,17 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import com.lmiky.admin.authority.service.AuthorityService;
-import com.lmiky.admin.cache.CacheFactory;
-import com.lmiky.admin.cache.model.ObjectCache;
-import com.lmiky.admin.cache.model.SimpleCacheData;
+import com.lmiky.admin.authority.util.AuthorityUtils;
+import com.lmiky.admin.constants.Constants;
 import com.lmiky.admin.session.model.SessionInfo;
 import com.lmiky.admin.system.menu.model.LeftMenu;
 import com.lmiky.admin.system.menu.model.SubMenu;
 import com.lmiky.admin.system.menu.model.TopMenu;
 import com.lmiky.admin.system.menu.service.MenuParseService;
-import com.lmiky.admin.util.Environment;
-import com.lmiky.admin.web.constants.Constants;
-import com.lmiky.admin.web.util.WebUtils;
+import com.lmiky.platform.cache.CacheFactory;
+import com.lmiky.platform.cache.model.ObjectCache;
+import com.lmiky.platform.cache.model.SimpleCacheData;
+import com.lmiky.platform.util.Environment;
 
 /**
  * @author lmiky
@@ -39,7 +39,7 @@ public class MenuParseServiceImpl implements MenuParseService {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.lmiky.jdp.system.menu.service.MenuService#init()
+	 * @see com.lmiky.admin.system.menu.service.MenuService#init()
 	 */
 	public void init() throws Exception {
 		cache = cacheFactory.getCache(cacheName);
@@ -48,7 +48,7 @@ public class MenuParseServiceImpl implements MenuParseService {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.lmiky.jdp.system.menu.service.MenuService#parse()
+	 * @see com.lmiky.admin.system.menu.service.MenuService#parse()
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public synchronized void parse() throws Exception {
@@ -130,7 +130,7 @@ public class MenuParseServiceImpl implements MenuParseService {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.lmiky.jdp.system.menu.service.MenuService#parse(com.lmiky.jdp.session.model.SessionInfo)
+	 * @see com.lmiky.admin.system.menu.service.MenuService#parse(com.lmiky.admin.session.model.SessionInfo)
 	 */
 	@SuppressWarnings("unchecked")
 	public List<TopMenu> getTopMenus(SessionInfo sessionInfo) throws Exception {
@@ -174,7 +174,7 @@ public class MenuParseServiceImpl implements MenuParseService {
 			for (SubMenu subMenu : leftMenu.getSubMenus()) {
 				if (!StringUtils.isBlank(subMenu.getAuthority())) {
 					// 检查权限
-					if (!WebUtils.checkAuthority(authorityService, sessionInfo, subMenu.getAuthority())) { // 查询
+					if (!AuthorityUtils.checkAuthority(authorityService, sessionInfo, subMenu.getAuthority())) { // 查询
 						continue;
 					}
 				}
@@ -193,7 +193,7 @@ public class MenuParseServiceImpl implements MenuParseService {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.lmiky.jdp.system.menu.service.MenuService#getTopMenu(java.lang.String, com.lmiky.jdp.session.model.SessionInfo)
+	 * @see com.lmiky.admin.system.menu.service.MenuService#getTopMenu(java.lang.String, com.lmiky.admin.session.model.SessionInfo)
 	 */
 	@SuppressWarnings("unchecked")
 	public TopMenu getTopMenu(String topMenuId, SessionInfo sessionInfo) throws Exception {
@@ -206,7 +206,7 @@ public class MenuParseServiceImpl implements MenuParseService {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.lmiky.jdp.system.menu.service.MenuService#getLeftMenus(java.lang.String, com.lmiky.jdp.session.model.SessionInfo)
+	 * @see com.lmiky.admin.system.menu.service.MenuService#getLeftMenus(java.lang.String, com.lmiky.admin.session.model.SessionInfo)
 	 */
 	public List<LeftMenu> getLeftMenus(String topMenuId, SessionInfo sessionInfo) throws Exception {
 		List<LeftMenu> leftMenuList = new ArrayList<LeftMenu>();
@@ -219,7 +219,7 @@ public class MenuParseServiceImpl implements MenuParseService {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.lmiky.jdp.system.menu.service.MenuService#getSubMenu(java.lang.String, com.lmiky.jdp.session.model.SessionInfo)
+	 * @see com.lmiky.admin.system.menu.service.MenuService#getSubMenu(java.lang.String, com.lmiky.admin.session.model.SessionInfo)
 	 */
 	@SuppressWarnings("unchecked")
 	public SubMenu getSubMenu(String subMenuId, SessionInfo sessionInfo) throws Exception {
@@ -234,7 +234,7 @@ public class MenuParseServiceImpl implements MenuParseService {
 		SubMenu subMenu = cacheData.getValue();
 		if (!StringUtils.isBlank(subMenu.getAuthority()) && sessionInfo != null) {
 			// 检查权限
-			if (!WebUtils.checkAuthority(authorityService, sessionInfo, subMenu.getAuthority())) { // 查询
+			if (!AuthorityUtils.checkAuthority(authorityService, sessionInfo, subMenu.getAuthority())) { // 查询
 				return null;
 			}
 		}

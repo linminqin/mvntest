@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.markany.gameboss.game.pojo.GameItem">
+	<resultMap type="GameItem" id="baseGameItem" extends="com.lmiky.jdp.database.pojo.BasePojo.basePojo">
+		<result column="gameId" property="gameId"/>
+		<result column="code" property="code"/>
+		<result column="name" property="name"/>
+		<result column="price" property="price"/>
+		<result column="createTime" property="createTime"/>
+		<result column="summary" property="summary"/>
+	</resultMap>
+	<resultMap type="GameItem" id="gameItem" extends="com.markany.gameboss.game.pojo.GameItem.baseGameItem">
+		<association property="game" column="gameId" select="com.markany.gameboss.game.pojo.Game.findById"/>
+	</resultMap>
+
+	<sql id="tableName">
+		t_game_item
+	</sql>
+	<sql id="tableAlias">
+		GameItem
+	</sql>
+	<sql id="joinTable">
+		<if test="hasJoin and joinTableAlias.contains('Game')">
+     		join <include refid="com.markany.gameboss.game.pojo.Game.tableName"/> Game on Game.id = <include refid="tableAlias" />.gameId
+     	</if>
+	</sql>
+	<select id="find" resultMap="gameItem">
+		select * from 
+		<include refid="tableName"/> <include refid="tableAlias" />
+		<trim prefix="where">
+			<include refid="common.aliasPropertiesCondition"/>
+		</trim>
+	</select>
+	
+	<select id="findById" resultMap="gameItem">
+		select * from 
+		<include refid="tableName"/>
+		where id = #{id}
+	</select>
+	
+	<select id="findByCode" resultMap="gameItem">
+		select * from 
+		<include refid="tableName"/>
+		where code = #{code}
+	</select>
+	
+	<select id="list" resultMap="gameItem">
+		select * from
+		<include refid="tableName" /> <include refid="tableAlias" />
+		<include refid="joinTable" />
+		<trim prefix="where">
+			<include refid="common.aliasPropertiesCondition" />
+		</trim>
+		<include refid="common.sortCondition" />
+		<include refid="common.pageCondition" />
+	</select>
+
+	<insert id="add" parameterType="GameItem" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		insert into
+		<include refid="tableName" />
+		(
+			 id
+			,code
+			,createTime
+			,gameId
+			,name
+			,price
+			,summary
+		)
+		values
+		(
+			 #{id}
+			,#{code}
+			,#{createTime}
+			,#{gameId}
+			,#{name}
+			,#{price}
+			,#{summary}
+		)
+	</insert>
+	
+	<update id="update" parameterType="GameItem">
+		update <include refid="tableName" /> 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="code != null">code=#{code},</if>
+			<if test="createTime != null">createTime=#{createTime},</if>
+			<if test="gameId != null">gameId=#{gameId},</if>
+			<if test="name != null">name=#{name},</if>
+			<if test="price != null">price=#{price},</if>
+			<if test="summary != null">summary=#{summary},</if>
+		</trim>
+		where id=#{id}
+	</update>
+	
+	<select id="count" resultType="java.lang.Integer">
+     	select count(*) from ${tableName} ${tableAlias}
+     	<include refid="joinTable" />
+     	<trim prefix="where">
+    		<include refid="common.aliasPropertiesCondition"/>
+    	</trim>
+     </select>
+</mapper>

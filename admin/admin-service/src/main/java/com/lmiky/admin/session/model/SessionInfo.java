@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.lmiky.admin.constants.Constants;
 import com.lmiky.admin.system.menu.model.SubMenu;
 import com.lmiky.admin.system.menu.model.TopMenu;
 import com.lmiky.admin.user.pojo.User;
-import com.lmiky.admin.util.BundleUtils;
-import com.lmiky.admin.web.constants.Constants;
+import com.lmiky.platform.util.BundleUtils;
 
 /**
  * Session信息
@@ -26,13 +26,13 @@ public class SessionInfo implements Serializable {
 	private Map<String, Boolean> authoritys = new HashMap<String, Boolean>();
 	private Map<String, Boolean> menuFavoriteInfo = new HashMap<String, Boolean>();
 	private String latelyOperateMenuId; // 最后操作的菜单ID
-	private String systemUrlParamHistory = BundleUtils.getStringValue(Constants.PROPERTIES_KEY_WEB_FILE, "system.url.param.history").toLowerCase();
-	private String systemUrlParamNoHistory = BundleUtils.getStringValue(Constants.PROPERTIES_KEY_WEB_FILE, "system.url.param.history.noRemember").toLowerCase();
+	private String systemUrlParamHistory = BundleUtils.getStringValue(Constants.PROPERTIES_KEY_ADMIN_FILE, "system.url.param.history").toLowerCase();
+	private String systemUrlParamNoHistory = BundleUtils.getStringValue(Constants.PROPERTIES_KEY_ADMIN_FILE, "system.url.param.history.noRemember").toLowerCase();
 	private int systenUriPatternLength = Constants.SYSTEM_URI_PATTERN.length();
 	//访问页面历史记录，提供“退后”按钮使用
 	@SuppressWarnings("rawtypes")
 	private Map<String, Map> urlParamHistorys = new LinkedHashMap<String, Map>();
-	private int urlParamHistoryNum = BundleUtils.getIntValue(Constants.PROPERTIES_KEY_WEB_FILE, "system.url.param.history.num");
+	private int urlParamHistoryNum = BundleUtils.getIntValue(Constants.PROPERTIES_KEY_ADMIN_FILE, "system.url.param.history.num");
 	//拥有权限的顶层菜单列表
 	private List<TopMenu> topMenus;
 	//最近操作菜单

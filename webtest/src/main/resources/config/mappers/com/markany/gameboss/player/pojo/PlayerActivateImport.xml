@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.markany.gameboss.player.pojo.PlayerActivateImport">
+		<resultMap type="PlayerActivateImport" id="basePlayerActivateImport" extends="com.lmiky.jdp.database.pojo.BasePojo.basePojo">
+		<result column="download" property="download"/>
+		<result column="gameCode" property="gameCode"/>
+		<result column="channelCode" property="channelCode"/>
+		<result column="importTime" property="importTime"/>
+		<result column="stateDate" property="stateDate"/>
+	</resultMap>
+	<resultMap type="PlayerActivateImport" id="playerActivateImport" extends="com.markany.gameboss.player.pojo.PlayerActivateList.basePlayerActivateList">
+		<association column="channelCode" property="channel" select="com.markany.gameboss.channel.pojo.Channel.findByCode"/>
+		<association column="gameCode" property="gameVersion" select="com.markany.gameboss.game.pojo.GameVersion.findByCode"/>
+	</resultMap>
+	
+	<sql id="tableName">
+		t_player_activate_import
+	</sql>
+	<sql id="tableAlias">
+		PlayerActivateImport
+	</sql>
+	<sql id="joinTable">
+		<if test="hasJoin and joinTableAlias.contains('GameVersion')">
+     		join <include refid="com.markany.gameboss.game.pojo.GameVersion.tableName"/> GameVersion on GameVersion.code = <include refid="tableAlias" />.gameCode
+     	</if>
+     	<if test="hasJoin and joinTableAlias.contains('Channel')">
+     		join <include refid="com.markany.gameboss.channel.pojo.Channel.tableName"/> Channel on Channel.code = <include refid="tableAlias" />.channelCode
+     	</if>
+	</sql>
+
+	<select id="find" resultMap="playerActivateImport">
+		select * from 
+		<include refid="tableName"/> <include refid="tableAlias" />
+		<include refid="joinTable"/>
+		<trim prefix="where">
+			<include refid="common.aliasPropertiesCondition"/>
+		</trim>
+	</select>
+	
+	<select id="findById" resultMap="playerActivateImport">
+		select * from 
+		<include refid="tableName"/>
+		where id = #{id}
+	</select>
+	
+	<select id="list" resultMap="playerActivateImport">
+		select * from
+		<include refid="tableName" /> <include refid="tableAlias" />
+		<include refid="joinTable"/>
+		<trim prefix="where">
+			<include refid="common.aliasPropertiesCondition" />
+		</trim>
+		<include refid="common.sortCondition" />
+		<include refid="common.pageCondition" />
+	</select>
+	
+	<!-- 查询统计 -->
+	<select id="queryCount" resultType="java.util.HashMap">
+		select ifnull(sum(download), 0) downloadCount from
+		<include refid="tableName" /> <include refid="tableAlias" />
+		<include refid="joinTable"/>
+		<trim prefix="where">
+			<include refid="common.aliasPropertiesCondition" />
+		</trim>
+	</select>
+	
+	<select id="count" resultType="java.lang.Integer">
+     	select count(*) from 
+     	<include refid="tableName" /> <include refid="tableAlias" />
+     	<include refid="joinTable"/>
+     	<trim prefix="where">
+    		<include refid="common.aliasPropertiesCondition"/>
+    	</trim>
+     </select>
+
+	<insert id="add" parameterType="PlayerActivateImport" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		insert into
+		<include refid="tableName" />
+		(
+			 id
+			,importTime
+			,stateDate
+			,gameCode
+			,channelCode
+			,download
+		)
+		values
+		(
+			 #{id}
+			,#{importTime}
+			,#{stateDate}
+			,#{gameCode}
+			,#{channelCode}
+			,#{download}
+		)
+	</insert>
+	
+	<update id="update" parameterType="PlayerActivateImport">
+		update <include refid="tableName" /> 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="importTime != null">importTime=#{importTime},</if>
+			<if test="gameCode != null">gameCode=#{gameCode},</if>
+			<if test="download != null">download=#{download},</if>
+			<if test="channelCode != null">channelCode=#{channelCode},</if>
+			<if test="stateDate != null">stateDate=#{stateDate},</if>
+		</trim>
+		where id=#{id}
+	</update>
+</mapper>

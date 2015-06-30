@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.markany.gameboss.gamechannel.pojo.GameChannel">
+	<resultMap type="GameChannel" id="baseGameChannel" extends="com.lmiky.jdp.database.pojo.BasePojo.basePojo">
+		<result column="gameversionId" property="gameversionId"/>
+		<result column="channelId" property="channelId"/>
+		<result column="mapTime" property="mapTime"/>
+		<result column="summary" property="summary"/>
+	</resultMap>
+	<resultMap type="GameChannel" id="gameChannel" extends="com.markany.gameboss.gamechannel.pojo.GameChannel.baseGameChannel">
+		<association column="channelId" property="channel" select="com.markany.gameboss.channel.pojo.Channel.findById"/>
+		<association column="gameversionId" property="gameVersion" select="com.markany.gameboss.game.pojo.GameVersion.findById"/>
+	</resultMap>
+	
+	<resultMap type="GameChannel" id="gameChannelDetail" extends="com.markany.gameboss.gamechannel.pojo.GameChannel.baseGameChannel">
+		<association property="gameVersion" column="id" foreignColumn="gameversionId" resultMap="com.markany.gameboss.game.pojo.GameVersion.gameVersionDetail"  columnPrefix="gv_"/>
+		<association property="channel" column="id" foreignColumn="channelId" resultMap="com.markany.gameboss.channel.pojo.Channel.channel"  columnPrefix="c_"/>
+	</resultMap>
+
+	<sql id="tableName">
+		t_game_channel
+	</sql>
+	<sql id="tableAlias">
+		GameChannel
+	</sql>
+	<sql id="joinTable">
+		<if test="hasJoin and joinTableAlias.contains('GameVersion')">
+     		join <include refid="com.markany.gameboss.game.pojo.GameVersion.tableName"/> GameVersion on GameVersion.id = <include refid="tableAlias" />.gameversionId
+     	</if>
+     	<if test="hasJoin and joinTableAlias.contains('Channel')">
+     		join <include refid="com.markany.gameboss.channel.pojo.Channel.tableName"/> Channel on Channel.id = <include refid="tableAlias" />.channelId
+     	</if>
+	</sql>
+	
+	<select id="find" resultMap="gameChannel">
+		select * from 
+		<include refid="tableName"/> <include refid="tableAlias" />
+		<trim prefix="where">
+			<include refid="common.aliasPropertiesCondition"/>
+		</trim>
+	</select>
+	
+	<select id="findById" resultMap="gameChannel">
+		select * from 
+		<include refid="tableName"/>
+		where id = #{id}
+	</select>
+	
+	<select id="findByChannelCodeAndGameCode" resultMap="gameChannel">
+		select 
+		  gc.* 
+		from
+		  t_game_channel gc,
+		  t_game_version v,
+		  t_channel c 
+		where gc.channelId = c.id 
+		  and gc.gameversionId = v.id 
+		  and v.code = #{gameCode}
+		  and c.code = #{channelCode}
+	</select>
+	
+	<select id="list" resultMap="gameChannel">
+		select * from
+		<include refid="tableName" /> <include refid="tableAlias" />
+		<include refid="joinTable"/>
+		<trim prefix="where">
+			<include refid="common.aliasPropertiesCondition" />
+		</trim>
+		<include refid="common.sortCondition" />
+		<include refid="common.pageCondition" />
+	</select>
+	
+	<!-- 列出详细信息 -->
+	<select id="listDetail" resultMap="gameChannelDetail">
+		select 
+		  GameChannel.id,
+		  GameChannel.mapTime,
+		  GameChannel.gameversionId,
+		  GameChannel.channelId,
+		  GameChannel.summary summary,
+		  GameVersion.id gv_id,
+		  GameVersion.code gv_code,
+		  GameVersion.version gv_version,
+		  GameVersion.createTime gv_createTime,
+		  GameVersion.summary gv_summary,
+		  Game.id gv_game_id,
+		  Game.name gv_game_name,
+		  Game.createTime gv_game_createTime,
+		  Game.summary gv_game_summary,
+		  Channel.id c_id,
+		  Channel.name c_name,
+		  Channel.code c_code,
+		  Channel.createTime c_createTime,
+		  Channel.summary c_summary
+		from
+		  t_game_channel GameChannel,
+		  t_game_version GameVersion,
+		  t_game Game,
+		  t_channel Channel 
+		<where>
+			<trim suffix="and">
+		 		<include refid="common.aliasPropertiesCondition" />
+		 	</trim>
+			GameChannel.gameversionId = GameVersion.id 
+			and GameChannel.channelId = Channel.id 
+			and GameVersion.gameId = Game.id 
+		</where>
+		<include refid="common.sortCondition" />
+		<include refid="common.pageCondition" />
+	</select>
+
+	<select id="count" resultType="java.lang.Integer">
+     	select count(*) from
+     	<include refid="tableName" /> <include refid="tableAlias" />
+		<include refid="joinTable"/>
+     	<trim prefix="where">
+    		<include refid="common.aliasPropertiesCondition"/>
+    	</trim>
+     </select>
+     
+     <select id="countDetail" resultType="java.lang.Integer">
+     	select count(*)
+     	from
+		  t_game_channel GameChannel,
+		  t_game_version GameVersion,
+		  t_game Game,
+		  t_channel Channel 
+     	<where>
+			<trim suffix="and">
+		 		<include refid="common.aliasPropertiesCondition" />
+		 	</trim>
+			GameChannel.gameversionId = GameVersion.id 
+			and GameChannel.channelId = Channel.id 
+			and GameVersion.gameId = Game.id 
+		</where>
+     </select>
+
+	<insert id="add" parameterType="GameChannel" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		insert into
+		<include refid="tableName" />
+		(
+			 id
+			,channelId
+			,gameversionId
+			,mapTime
+			,summary
+		)
+		values
+		(
+			 #{id}
+			,#{channel.id}
+			,#{gameVersion.id}
+			,#{mapTime}
+			,#{summary}
+		)
+	</insert>
+	
+	<update id="update" parameterType="GameChannel">
+		update <include refid="tableName" /> 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="channel != null and channel.id != null">channelId=#{channel.id},</if>
+			<if test="gameVersion != null and gameVersion.id != null">gameversionId=#{gameVersion.id},</if>
+			<if test="mapTime != null">mapTime=#{mapTime},</if>
+			<if test="summary != null">summary=#{summary},</if>
+		</trim>
+		where id=#{id}
+	</update>
+</mapper>

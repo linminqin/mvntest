@@ -2,8 +2,6 @@ package com.lmiky.admin.system.menu.model;
 
 import java.io.Serializable;
 
-import com.lmiky.jdp.system.menu.model.Menu;
-
 /**
  * 菜单
  * @author lmiky
