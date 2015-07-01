@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.lmiky.admin.module.pojo.Function">
-	<resultMap type="Function" id="function" extends="com.lmiky.admin.sort.pojo.BaseSortPojo.baseSortPojo">
+	<resultMap type="Function" id="function" extends="com.lmiky.platform.sort.pojo.BaseSortPojo.baseSortPojo">
 		<result column="name" property="name"/>
 		<result column="authorityCode" property="authorityCode"/>
 		<association property="module" column="moduleId" select="com.lmiky.admin.module.pojo.Module.findById"/>

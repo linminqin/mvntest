@@ -2,7 +2,7 @@
 <%@ include file="/jdp/common/common.jsp" %>
 <%@ page import="com.lmiky.admin.system.menu.controller.MenuController" %>
 <div id="header">
-	<h1><a href="https://github.com/linminqin/lmiky">游戏运营系统</a></h1>
+	<h1><a href="https://github.com/linminqin/lmiky">管理系统</a></h1>
 </div>
 <div id="user-nav" class="navbar navbar-inverse">
 	<ul class="nav btn-group">

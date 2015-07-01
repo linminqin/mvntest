@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/jdp/common/htmlDoctype.jsp"%>
 <%@ include file="/jdp/common/common.jsp"%>
-<%@ page import="com.lmiky.jdp.tree.controller.TreeController,com.lmiky.jdp.tree.pojo.BaseTreePojo" %>
+<%@ page import="com.lmiky.admin.tree.controller.TreeController,com.lmiky.platform.tree.pojo.BaseTreePojo" %>
 <%@page import="com.lmiky.cms.directory.pojo.CmsDirectory"%>
-<%@page import="com.lmiky.jdp.controller.view.BaseCodeView"%>
-<%@page import="com.lmiky.jdp.controller.view.BaseCode"%>
+<%@page import="com.lmiky.platform.controller.view.BaseCodeView"%>
+<%@page import="com.lmiky.platform.controller.view.BaseCode"%>
 <html>
 	<head>
 		<base target="_self"/>

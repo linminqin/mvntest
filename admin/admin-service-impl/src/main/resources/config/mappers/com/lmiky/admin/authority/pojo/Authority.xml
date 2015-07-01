@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.lmiky.admin.authority.pojo.Authority">
-	<resultMap type="Authority" id="authority" extends="com.lmiky.admin.database.pojo.BasePojo.basePojo">
+	<resultMap type="Authority" id="authority" extends="com.lmiky.platform.database.pojo.BasePojo.basePojo">
 		<result column="operator" property="operator" />
 		<result column="modulePath" property="modulePath" />
 		<result column="authorityCode" property="authorityCode" />

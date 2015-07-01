@@ -32,8 +32,8 @@ public class Constants {
 
 	//文件上传路径
 	//临时目录
-	public static final String SYSTEM_FILE_UPLOAD_PATH_TEMP = BundleUtils.getStringValue(PROPERTIES_KEY_PLATFORM_FILE, "system.file.upload.path.temp");
-	public static final String SYSTEM_FILE_PATH = BundleUtils.getStringValue(PROPERTIES_KEY_PLATFORM_FILE, "system.file.path");
+	public static final String SYSTEM_FILE_UPLOAD_PATH_TEMP = BundleUtils.getStringContextValue("system.file.upload.path.temp");
+	public static final String SYSTEM_FILE_PATH = BundleUtils.getStringContextValue("system.file.path");
 	
 	// ****************************************properties文件****************************************//
 }

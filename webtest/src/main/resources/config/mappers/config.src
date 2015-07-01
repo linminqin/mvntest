@@ -2,16 +2,12 @@
 #custom：自定义
 #common：通用
 #没在本文件配置的，默认为common
+#操作员
+com.lmiky.jdp.user.pojo.Operator_count=custom
 
-#游戏
-com.markany.gameboss.game.pojo.GameVersion_count=custom
-#游戏渠道
-com.markany.gameboss.gamechannel.pojo.GameChannel_count=custom
-#游戏道具
-com.markany.gameboss.game.pojo.GameItem_count=custom
-#下载查询
-com.markany.gameboss.player.pojo.PlayerActivateList_count=custom
-com.markany.gameboss.player.pojo.PlayerActivateImport_count=custom
-#消费查询
-com.markany.gameboss.player.pojo.PlayerConsumeList_count=custom
-com.markany.gameboss.player.pojo.PlayerConsumeImport_count=custom
+#内容目录
+com.lmiky.cms.directory.pojo.CmsDirectory_count=custom
+com.lmiky.cms.directory.pojo.CmsDirectory_updateByParams=custom
+
+#内容
+com.lmiky.cms.resource.pojo.CmsResource_count=custom

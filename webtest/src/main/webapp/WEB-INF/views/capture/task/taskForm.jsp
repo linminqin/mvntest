@@ -37,7 +37,7 @@
 							</div>
 							<div class="nopadding">
 									<%@ include file="/jdp/form/messages.jsp" %>
-									<jsp:include page="<%=(String)request.getAttribute(com.lmiky.jdp.form.controller.FormController.HTTP_PARAM_FORM_SUBFORM)%>" />
+									<jsp:include page="<%=(String)request.getAttribute(com.lmiky.admin.form.controller.FormController.HTTP_PARAM_FORM_SUBFORM)%>" />
 							</div>
 						</div>						
 					</div>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/jdp/common/htmlDoctype.jsp"%>
 <%@ include file="/jdp/common/common.jsp"%>
-<%@ page import="com.lmiky.jdp.user.pojo.User"%>
+<%@ page import="com.lmiky.admin.user.pojo.User"%>
 <c:set var="yesValid" value="<%=User.VALID_YES%>" />
 <c:set var="noValid" value="<%=User.VALID_NO%>" />
 <html>
@@ -54,7 +54,7 @@
 								<th>操作</th>
 								<c:set var="colCount" value="3"/>
 								<lauthority:checkAuthority
-									authorityCode="jdp_user_operator_delete">
+									authorityCode="admin_user_operator_delete">
 									<c:set var="colCount" value="4"/>
 									<th class="simpleCheckbox"><input type="checkbox"
 										name="batctSelectDelete" id="batctSelectDelete" value=""

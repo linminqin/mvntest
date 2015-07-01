@@ -22,7 +22,8 @@
 	</context:component-scan>
 	
 	<!-- jar包内的配置文件不能用通配符 -->
+	<import resource="classpath*:config/applicationContext-platform-common.xml" />
+	<import resource="classpath*:config/applicationContext-admin.xml" />
 	<import resource="classpath*:config/applicationContext-database.xml" />
 	<import resource="classpath*:config/applicationContext-redis.xml" />
-	<import resource="classpath*:config/applicationContext-platform-common.xml" />
 </beans>

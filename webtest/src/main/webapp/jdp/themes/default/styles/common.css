@@ -10,13 +10,16 @@ body {
 	width: 1200px; 
 	margin-left: auto; 
 	margin-right: auto;
+	/* width: 100%;
+	margin-left: 220px; */
 }
 
 .container_content {
-	width: 1200px; 
-	margin-left: auto; 
-	margin-right: auto; 
-	margin-top: 72px; 
+	width: 1200px;
+	/* width: 100%; */
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 72px;
 	background-color: #444444;
 }
 
@@ -25,10 +28,11 @@ body {
 }
 
 #content {
-		min-height: 700px;
+	min-height: 700px;
 }
 
-#mainForm label, #mainForm input,  #mainForm div,  #mainForm span,  #mainForm select {
+#mainForm label, #mainForm input, #mainForm div, #mainForm span,
+	#mainForm select {
 	font-size: 12px !important;
 }
 
@@ -43,10 +47,12 @@ body {
 	color: #ffffff;
 	font-size: 12px;
 }
-.font_style2{
+
+.font_style2 {
 	color: #FF5235;
 	font-size: 12px;
 }
+
 .font_style3 {
 	font-size: 14px;
 	color: #4B4B4B;
@@ -66,32 +72,32 @@ body {
 }
 
 .border-radius {
-	border-radius : 4px;
+	border-radius: 4px;
 	-webkit-border-radius: 4px;
 }
 
-.mini{
-    width: 40px !important;
+.mini {
+	width: 40px !important;
 }
 
-.small{
-    width: 70px !important;
+.small {
+	width: 70px !important;
 }
 
-.medium{
-    width: 130px !important;
+.medium {
+	width: 130px !important;
 }
 
 .large {
-    width: 200px !important;
+	width: 200px !important;
 }
 
 .larger {
-    width: 350px !important;
+	width: 350px !important;
 }
 
 .full {
-    width: 100% !important;
+	width: 100% !important;
 }
 
 .req {

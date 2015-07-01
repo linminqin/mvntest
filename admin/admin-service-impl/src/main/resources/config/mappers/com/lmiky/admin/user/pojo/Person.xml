@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.lmiky.admin.user.pojo.Person">
-	<resultMap type="Person" id="person" extends="com.lmiky.admin.database.pojo.BasePojo.basePojo">
+	<resultMap type="Person" id="person" extends="com.lmiky.platform.database.pojo.BasePojo.basePojo">
 		<result column="name" property="name"/>
 		<result column="email" property="email"/>
 		<result column="phone" property="phone"/>

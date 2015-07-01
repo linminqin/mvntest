@@ -16,7 +16,7 @@
 						<div class="form-table">
 							<div class="nopadding" style="text-align: center;">
 								<%@ include file="/jdp/form/messages.jsp" %>
-								<jsp:include page="<%=(String)request.getAttribute(com.lmiky.jdp.form.controller.FormController.HTTP_PARAM_FORM_SUBFORM)%>" />
+								<jsp:include page="<%=(String)request.getAttribute(com.lmiky.admin.form.controller.FormController.HTTP_PARAM_FORM_SUBFORM)%>" />
 							</div>
 						</div>
 				</form:form>

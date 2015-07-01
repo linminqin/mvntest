@@ -4,7 +4,7 @@
 
 <mapper namespace="com.lmiky.admin.system.menu.pojo.MyFavoriteMenu">
 	<resultMap type="MyFavoriteMenu" id="myFavoriteMenu"
-		extends="com.lmiky.admin.database.pojo.BasePojo.basePojo">
+		extends="com.lmiky.platform.database.pojo.BasePojo.basePojo">
 		<result column="userId" property="userId" />
 		<result column="addTime" property="addTime" />
 		<result column="menuId" property="menuId" />

@@ -4,7 +4,7 @@
 
 <mapper namespace="com.lmiky.admin.system.menu.pojo.LatelyOperateMenu">
 	<resultMap type="LatelyOperateMenu" id="latelyOperateMenu"
-		extends="com.lmiky.admin.database.pojo.BasePojo.basePojo">
+		extends="com.lmiky.platform.database.pojo.BasePojo.basePojo">
 		<result column="userId" property="userId" />
 		<result column="opeTime" property="opeTime" />
 		<result column="menuId" property="menuId" />
@@ -18,31 +18,40 @@
 	</sql>
 
 	<select id="find" resultMap="latelyOperateMenu">
-		select * from 
-		<include refid="tableName"/> <include refid="tableAlias" />
+		select * from
+		<include refid="tableName" />
+		<include refid="tableAlias" />
 		<trim prefix="where">
-			<include refid="common.aliasPropertiesCondition"/>
+			<include refid="common.aliasPropertiesCondition" />
 		</trim>
 	</select>
 
-	<insert id="add" parameterType="LatelyOperateMenu" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+	<insert id="add" parameterType="LatelyOperateMenu"
+		useGeneratedKeys="true" keyColumn="id" keyProperty="id">
 		insert into
 		<include refid="tableName" />
-		(id, userId, opeTime, menuId) values(#{id}, #{userId}, #{opeTime}, #{menuId})
+		(id, userId, opeTime, menuId) values(#{id}, #{userId}, #{opeTime},
+		#{menuId})
 	</insert>
 
 	<select id="list" resultMap="latelyOperateMenu">
 		select * from
-		<include refid="tableName" /> <include refid="tableAlias" />
+		<include refid="tableName" />
+		<include refid="tableAlias" />
 		<trim prefix="where">
 			<include refid="common.aliasPropertiesCondition" />
 		</trim>
 		<include refid="common.sortCondition" />
 		<include refid="common.pageCondition" />
 	</select>
-	
+
 	<!-- 获取收藏夹菜单ID -->
-	<select id="listLatelyOperateMenuId" resultType="java.lang.String" >
-		select distinct menuId from <include refid="tableName" />  <include refid="tableAlias" /> where userId = #{userId} <include refid="common.sortCondition"/> <include refid="common.pageCondition"/>
+	<select id="listLatelyOperateMenuId" resultType="java.lang.String">
+		select distinct menuId from
+		<include refid="tableName" />
+		<include refid="tableAlias" />
+		where userId = #{userId}
+		<include refid="common.sortCondition" />
+		<include refid="common.pageCondition" />
 	</select>
 </mapper>
