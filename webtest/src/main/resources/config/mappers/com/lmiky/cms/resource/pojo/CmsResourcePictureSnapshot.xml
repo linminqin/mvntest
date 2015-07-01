@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lmiky.cms.resource.pojo.CmsResourcePictureSnapshot">
+	<resultMap type="CmsResourcePictureSnapshot" id="cmsResourcePictureSnapshot" extends="com.lmiky.platform.database.pojo.BasePojo.basePojo">
+		<result column="resourceId" property="resourceId"/>
+		<result column="path" property="path"/>
+	</resultMap>
+
+	<sql id="tableName">
+		t_cms_resource_picture_snapshot
+	</sql>
+	<sql id="tableAlias">
+		CmsResourcePictureSnapshot
+	</sql>
+
+	<select id="find" resultMap="cmsResourcePictureSnapshot">
+		select * from 
+		<include refid="tableName"/> <include refid="tableAlias" />
+		<trim prefix="where">
+			<include refid="common.aliasPropertiesCondition"/>
+		</trim>
+	</select>
+	
+	<select id="findById" resultMap="cmsResourcePictureSnapshot">
+		select * from 
+		<include refid="tableName"/> <include refid="tableAlias" />
+		where id = #{id}
+	</select>
+	
+	<select id="list" resultMap="cmsResourcePictureSnapshot">
+		select * from
+		<include refid="tableName" /> <include refid="tableAlias" />
+		<trim prefix="where">
+			<include refid="common.aliasPropertiesCondition" />
+		</trim>
+		<include refid="common.sortCondition" />
+		<include refid="common.pageCondition" />
+	</select>
+	
+	<select id="listByResourceId" resultMap="cmsResourcePictureSnapshot">
+		select * from 
+		<include refid="tableName"/> <include refid="tableAlias" />
+		where resourceId = #{resourceId}
+	</select>
+
+	<insert id="add" parameterType="CmsResourcePictureSnapshot" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		insert into
+		<include refid="tableName" />
+		(
+			 id
+			 ,resourceId
+			 ,path
+		)
+		values
+		(
+			 #{id}
+			 ,#{resourceId}
+			 ,#{path}
+		)
+	</insert>
+	
+	<update id="update" parameterType="CmsResourcePictureSnapshot">
+		update <include refid="tableName" /> 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="resourceId != null">resourceId=#{resourceId},</if>
+			<if test="path != null">path=#{path},</if>
+		</trim>
+		where id=#{id}
+	</update>
+</mapper>

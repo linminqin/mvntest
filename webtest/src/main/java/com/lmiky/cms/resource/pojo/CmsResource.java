@@ -12,7 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import com.lmiky.admin.user.pojo.User;
 import com.lmiky.cms.directory.pojo.CmsDirectory;
@@ -40,7 +39,7 @@ public class CmsResource extends BasePojo {
 	private Date pubTime;
 	private String source;
 	private Integer state = STATE_CREATE;
-	private Set<CmsResourceContent> resourceContents;
+	private CmsResourceContent content;
 	private CmsDirectory directory;
 	private Set<CmsResourcePictureSnapshot> pictureSnapshots;
 	
@@ -166,32 +165,16 @@ public class CmsResource extends BasePojo {
 	}
 	
 	/**
-	 * @return the resourceContents
+	 * @return the content
 	 */
-	@OneToMany(mappedBy="cmsResource", fetch=FetchType.LAZY, cascade={CascadeType.ALL})
-	public Set<CmsResourceContent> getResourceContents() {
-		return resourceContents;
+	public CmsResourceContent getContent() {
+		return content;
 	}
 	/**
-	 * @param resourceContents the resourceContents to set
+	 * @param content the content to set
 	 */
-	public void setResourceContents(Set<CmsResourceContent> resourceContents) {
-		this.resourceContents = resourceContents;
-	}
-	
-	/**
-	 * 获取内容
-	 * @author lmiky
-	 * @date 2014-1-5
-	 * @return
-	 */
-	@Transient
-	public String getContent() {
-		Set<CmsResourceContent> rcs = getResourceContents();
-		if(rcs == null || rcs.isEmpty()) {
-			return "";
-		}
-		return rcs.iterator().next().getContent();
+	public void setContent(CmsResourceContent content) {
+		this.content = content;
 	}
 	/**
 	 * @return the directory

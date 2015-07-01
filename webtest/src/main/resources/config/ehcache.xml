@@ -10,7 +10,7 @@ diskExpiryThreadIntervalSeconds：磁盘缓存的清理线程运行间隔
 memoryStoreEvictionPolicy：缓存清除策略
 -->
 <ehcache updateCheck="false">
-	<diskStore path="D:/devsoft/apache-tomcat-8.0.15-2/cache/apitest"/>
+	<diskStore path="D:/apache-tomcat-7.0.55/cache/apitest"/>
   	<defaultCache
 		maxElementsInMemory="100000"	
 		eternal="false"

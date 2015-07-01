@@ -3,10 +3,7 @@ package com.lmiky.cms.resource.pojo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.lmiky.platform.database.pojo.BasePojo;
@@ -19,26 +16,24 @@ import com.lmiky.platform.database.pojo.BasePojo;
 @Entity
 @Table(name="t_cms_resource_content")
 public class CmsResourceContent extends BasePojo {
-	private static final long serialVersionUID = 6407808893561867426L;
-	private CmsResource cmsResource;
+	private static final long serialVersionUID = 2049457372891663063L;
+	private Long resourceId;
 	private String content;
 
 	/**
-	 * @return the cmsResource
+	 * @return the resourceId
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "resource_id", updatable = false)
-	public CmsResource getCmsResource() {
-		return cmsResource;
+	public Long getResourceId() {
+		return resourceId;
 	}
 
 	/**
-	 * @param cmsResource the cmsResource to set
+	 * @param resourceId the resourceId to set
 	 */
-	public void setCmsResource(CmsResource cmsResource) {
-		this.cmsResource = cmsResource;
+	public void setResourceId(Long resourceId) {
+		this.resourceId = resourceId;
 	}
-	
+
 	/**
 	 * @return the content
 	 */

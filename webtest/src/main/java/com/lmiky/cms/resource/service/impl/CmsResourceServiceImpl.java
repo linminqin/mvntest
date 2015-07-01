@@ -1,9 +1,12 @@
 package com.lmiky.cms.resource.service.impl;
 
+import java.util.Set;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lmiky.cms.resource.pojo.CmsResource;
+import com.lmiky.cms.resource.pojo.CmsResourceContent;
 import com.lmiky.cms.resource.pojo.CmsResourcePictureSnapshot;
 import com.lmiky.platform.database.model.PropertyCompareType;
 import com.lmiky.platform.database.model.PropertyFilter;
@@ -20,20 +23,63 @@ import com.lmiky.platform.service.impl.BaseServiceImpl;
 public class CmsResourceServiceImpl extends BaseServiceImpl {
 
 	/* (non-Javadoc)
-	 * @see com.lmiky.platform.service.impl.BaseServiceImpl#save(com.lmiky.platform.database.pojo.BasePojo)
+	 * @see com.lmiky.platform.service.impl.BaseServiceImpl#add(com.lmiky.platform.database.pojo.BasePojo)
 	 */
 	@Override
 	@Transactional(rollbackFor={Exception.class})
-	public <T extends BasePojo> void save(T pojo) throws ServiceException {
-		if(pojo.getId() != null && pojo instanceof CmsResource) {	//对象已存在
+	public <T extends BasePojo> void add(T pojo) throws ServiceException {
+		super.add(pojo);
+		if(pojo instanceof CmsResource) {
+			CmsResource resource = (CmsResource)pojo;
+			//内容
+			CmsResourceContent content = resource.getContent();
+			if(content != null) {
+				content.setResourceId(pojo.getId());
+				super.add(content);
+			}
+			//保存图片快照
+			Set<CmsResourcePictureSnapshot> pictureSnapshots = resource.getPictureSnapshots();
+			if(pictureSnapshots != null && !pictureSnapshots.isEmpty()) {
+				for(CmsResourcePictureSnapshot pictureSnapshot : pictureSnapshots) {
+					pictureSnapshot.setResourceId(pojo.getId());
+					super.add(pictureSnapshot);
+				}
+			}
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.lmiky.platform.service.impl.BaseServiceImpl#update(com.lmiky.platform.database.pojo.BasePojo)
+	 */
+	@Override
+	@Transactional(rollbackFor={Exception.class})
+	public <T extends BasePojo> void update(T pojo) throws ServiceException {
+		super.update(pojo);
+		if(pojo instanceof CmsResource) {
+			CmsResource resource = (CmsResource)pojo;
+			//内容
+			CmsResourceContent content = resource.getContent();
+			if(content != null) {
+				content.setResourceId(pojo.getId());
+				super.update(content);
+			} else {
+				super.delete(content);
+			}
+			//删除旧图片
 			PropertyFilter propertyFilter = new PropertyFilter();
 			propertyFilter.setCompareClass(CmsResourcePictureSnapshot.class);
 			propertyFilter.setCompareType(PropertyCompareType.EQ);
-			propertyFilter.setPropertyName("cmsResource.id");
-			propertyFilter.setPropertyValue(pojo.getId());
-			//删除旧的图片快照
-			delete(CmsResourcePictureSnapshot.class, propertyFilter);
+			propertyFilter.setPropertyName("resourceId");
+			propertyFilter.setPropertyValue(resource.getId());
+			super.delete(CmsResourcePictureSnapshot.class, propertyFilter);
+			//保存图片快照
+			Set<CmsResourcePictureSnapshot> pictureSnapshots = resource.getPictureSnapshots();
+			if(pictureSnapshots != null && !pictureSnapshots.isEmpty()) {
+				for(CmsResourcePictureSnapshot pictureSnapshot : pictureSnapshots) {
+					pictureSnapshot.setResourceId(pojo.getId());
+					super.add(pictureSnapshot);
+				}
+			}
 		}
-		super.save(pojo);
 	}
 }

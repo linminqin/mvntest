@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lmiky.cms.resource.pojo.CmsResourceContent">
+	<resultMap type="CmsResourceContent" id="cmsResourceContent" extends="com.lmiky.platform.database.pojo.BasePojo.basePojo">
+		<result column="resourceId" property="resourceId"/>
+		<result column="content" property="content"/>
+	</resultMap>
+
+	<sql id="tableName">
+		t_cms_resource_content
+	</sql>
+	<sql id="tableAlias">
+		CmsResourceContent
+	</sql>
+
+	<select id="find" resultMap="cmsResourceContent">
+		select * from 
+		<include refid="tableName"/> <include refid="tableAlias" />
+		<trim prefix="where">
+			<include refid="common.aliasPropertiesCondition"/>
+		</trim>
+	</select>
+	
+	<select id="findById" resultMap="cmsResourceContent">
+		select * from 
+		<include refid="tableName"/> <include refid="tableAlias" />
+		where id = #{id}
+	</select>
+	
+	<select id="findByResourceId" resultMap="cmsResourceContent">
+		select * from 
+		<include refid="tableName"/> <include refid="tableAlias" />
+		where resourceId = #{resourceId}
+	</select>
+	
+	<select id="list" resultMap="cmsResourceContent">
+		select * from
+		<include refid="tableName" /> <include refid="tableAlias" />
+		<trim prefix="where">
+			<include refid="common.aliasPropertiesCondition" />
+		</trim>
+		<include refid="common.sortCondition" />
+		<include refid="common.pageCondition" />
+	</select>
+
+	<insert id="add" parameterType="CmsResourceContent" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		insert into
+		<include refid="tableName" />
+		(
+			 id
+			 ,resourceId
+			 ,content
+		)
+		values
+		(
+			 #{id}
+			 ,#{resourceId}
+			 ,#{content}
+		)
+	</insert>
+	
+	<update id="update" parameterType="CmsResourceContent">
+		update <include refid="tableName" /> 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="resourceId != null">resourceId=#{resourceId},</if>
+			<if test="content != null">content=#{content},</if>
+		</trim>
+		where id=#{id}
+	</update>
+</mapper>

@@ -196,18 +196,12 @@ public class ResourceController extends FormController<CmsResource> {
 	protected void setPojoProperties(CmsResource pojo, ModelMap modelMap, HttpServletRequest request) throws Exception {
 		super.setPojoProperties(pojo, modelMap, request);
 		// 文章内容
-		Set<CmsResourceContent> contents = pojo.getResourceContents();
-		CmsResourceContent content = null;
-		if (contents == null) {
-			contents = new HashSet<CmsResourceContent>();
+		CmsResourceContent content = pojo.getContent();
+		if (content == null) {
 			content = new CmsResourceContent();
-			contents.add(content);
-		} else {
-			content = contents.iterator().next();
 		}
-		content.setContent(request.getParameter("content"));
-		content.setCmsResource(pojo);
-		pojo.setResourceContents(contents);
+		content.setContent(request.getParameter("resourceContent"));
+		pojo.setContent(content);
 		//所属目录
 		String directoryId = request.getParameter("directoryId");
 		if (!StringUtils.isBlank(directoryId)) {
@@ -223,7 +217,6 @@ public class ResourceController extends FormController<CmsResource> {
 				CmsResourcePictureSnapshot snapshot = new CmsResourcePictureSnapshot();
 				snapshot.setPath(pictureSnapshotPath);
 				pictureSnapshots.add(snapshot);
-				snapshot.setCmsResource(pojo);
 			}
 		}
 		pojo.setPictureSnapshots(pictureSnapshots);

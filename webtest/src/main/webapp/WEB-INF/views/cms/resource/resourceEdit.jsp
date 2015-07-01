@@ -61,7 +61,7 @@
 </div>
 <div class="control-group">
 	<div class="controls nolabel-full-controls">
-		<textarea rows="30" name="content" style="width: 100%;" id="htmlContent">${pojo.content}</textarea>
+		<textarea rows="30" name="resourceContent" style="width: 100%;" id="htmlContent">${pojo.content.content}</textarea>
 	</div>
 </div>
 <div class="form-actions">

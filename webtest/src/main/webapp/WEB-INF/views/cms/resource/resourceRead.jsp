@@ -56,7 +56,7 @@
 </div>
 <div class="control-group">
 	<div class="controls nolabel-full-controls">
-		${pojo.content}
+		${pojo.content.content}
 	</div>
 </div>
 <div class="form-actions">

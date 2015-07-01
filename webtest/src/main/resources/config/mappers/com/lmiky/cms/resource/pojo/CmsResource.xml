@@ -14,6 +14,8 @@
 		<association property="creator" column="creator" select="com.lmiky.admin.user.pojo.User.findById"/>
 		<association property="publisher" column="publisher" select="com.lmiky.admin.user.pojo.User.findById"/>
 		<association property="directory" column="directoryId" select="com.lmiky.cms.directory.pojo.CmsDirectory.findById"/>
+		<association property="content" column="id" select="com.lmiky.cms.resource.pojo.CmsResourceContent.findByResourceId" />
+		<collection property="pictureSnapshots" column="id" select="com.lmiky.cms.resource.pojo.CmsResourcePictureSnapshot.listByResourceId" />
 	</resultMap>
 
 	<sql id="tableName">
