@@ -10,9 +10,10 @@
 
 	<modules>
 		<module>admin-common</module>
-		<module>admin-web</module>
 		<module>admin-service</module>
+		<module>admin-web</module>
 		<module>admin-service-impl</module>
+		<module>admin-html</module>
 	</modules>
 
 

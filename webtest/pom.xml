@@ -12,6 +12,12 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.lmiky</groupId>
+			<artifactId>admin-html</artifactId>
+			<version>0.1</version>
+			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>com.lmiky</groupId>
 			<artifactId>admin-web</artifactId>
 			<version>0.1</version>
 		</dependency>
@@ -99,6 +105,14 @@
 							<directory>webapp</directory>
 						</resource>
 					</webResources>
+					<overlays>
+						<overlay>
+							<groupId>com.lmiky</groupId>
+							<artifactId>admin-html</artifactId>
+							<targetPath>jdp</targetPath>
+						</overlay>
+					</overlays>
+					<dependentWarExcludes>*/web.xml,WEB-INF/lib/*,/sql-map-config.xml,/jdbc.properties,/META-INF/*</dependentWarExcludes>	
 				</configuration>
 			</plugin>
 		</plugins>
