@@ -38,7 +38,6 @@ public class Client {
 			/* (non-Javadoc)
 			 * @see io.netty.util.concurrent.GenericFutureListener#operationComplete(io.netty.util.concurrent.Future)
 			 */
-			@Override
 			public void operationComplete(ChannelFuture channelFuture) throws Exception {
 				if (!channelFuture.isSuccess()) {
 					LoggerUtils.info(String.format("创建NIO连接失败，host: %s，port: %d", host, port));

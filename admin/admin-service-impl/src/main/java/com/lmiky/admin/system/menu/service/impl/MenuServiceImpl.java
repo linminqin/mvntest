@@ -38,7 +38,6 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService {
 	 * @see com.lmiky.admin.system.menu.service.MenuService#listFavoriteMenuId(java.lang.Long)
 	 */
 	
-	@Override
 	@Transactional(readOnly=true)
 	public List<String> listFavoriteMenuId(Long userId) throws ServiceException {
 		try {

@@ -52,7 +52,6 @@ public class HttpUtils {
 		 * (non-Javadoc)
 		 * @see org.apache.http.client.ResponseHandler#handleResponse(org.apache.http.HttpResponse)
 		 */
-		@Override
 		public String handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
 			int status = response.getStatusLine().getStatusCode();
 			if (status >= 200 && status < 300) {

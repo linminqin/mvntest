@@ -25,7 +25,6 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.admin.user.dao.UserDAO#listNoUserRoles(java.lang.Long)
 	 */
-	@Override
 	public List<Role> listNoUserRoles(Long userId) throws DatabaseException {
 		try {
 			Map<String, Object> params = generateParameterMap(Role.class);
@@ -40,7 +39,6 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.admin.user.dao.UserDAO#listNoRoleUser(java.lang.Long)
 	 */
-	@Override
 	public List<Operator> listNoRoleUser(Long roleId) throws DatabaseException {
 		try {
 			Map<String, Object> params = generateParameterMap(Operator.class);
@@ -55,7 +53,6 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.admin.user.dao.UserDAO#deleteUserRole(java.lang.Long)
 	 */
-	@Override
 	public void deleteUserRole(Long userId) throws DatabaseException {
 		try {
 			sqlSessionTemplate.delete(User.class.getName() + ".deleteUserRole", userId);
@@ -68,7 +65,6 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.admin.user.dao.UserDAO#addUserRole(java.lang.Long, java.lang.Long)
 	 */
-	@Override
 	public void addUserRole(Long userId, Long roleId) throws DatabaseException {
 		try {
 			Map<String, Object> params = generateParameterMap(User.class);
@@ -99,7 +95,6 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
 	/* (non-Javadoc)
 	 * @see com.lmiky.admin.user.dao.UserDAO#deleteOperatorUser()
 	 */
-	@Override
 	public void deleteOperatorUser() throws DatabaseException {
 		try {
 			sqlSessionTemplate.delete(User.class.getName() + ".deleteOperatorUser");

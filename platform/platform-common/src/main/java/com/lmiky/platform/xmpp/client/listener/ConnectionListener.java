@@ -16,7 +16,6 @@ public class ConnectionListener implements org.jivesoftware.smack.ConnectionList
 	/* (non-Javadoc)
 	 * @see org.jivesoftware.smack.ConnectionListener#connected(org.jivesoftware.smack.XMPPConnection)
 	 */
-	@Override
 	public void connected(XMPPConnection connection) {
 		LoggerUtils.debug("xmpp 成功连接 (" + connection.getConnectionCounter() + ")");
 	}
@@ -24,7 +23,6 @@ public class ConnectionListener implements org.jivesoftware.smack.ConnectionList
 	/* (non-Javadoc)
 	 * @see org.jivesoftware.smack.ConnectionListener#authenticated(org.jivesoftware.smack.XMPPConnection)
 	 */
-	@Override
 	public void authenticated(XMPPConnection connection) {
 		LoggerUtils.debug("xmpp 成功登陆 (" + connection.getConnectionCounter() + ": " + connection.getUser() + ")");
 	}
@@ -32,7 +30,6 @@ public class ConnectionListener implements org.jivesoftware.smack.ConnectionList
 	/* (non-Javadoc)
 	 * @see org.jivesoftware.smack.ConnectionListener#connectionClosed()
 	 */
-	@Override
 	public void connectionClosed() {
 //		try {
 //			ConnectionManager.disconnect();
@@ -45,7 +42,6 @@ public class ConnectionListener implements org.jivesoftware.smack.ConnectionList
 	/* (non-Javadoc)
 	 * @see org.jivesoftware.smack.ConnectionListener#connectionClosedOnError(java.lang.Exception)
 	 */
-	@Override
 	public void connectionClosedOnError(Exception e) {
 		LoggerUtils.error("xmpp connectionClosedOnError");
 		LoggerUtils.logException(e);
@@ -59,14 +55,12 @@ public class ConnectionListener implements org.jivesoftware.smack.ConnectionList
 	/* (non-Javadoc)
 	 * @see org.jivesoftware.smack.ConnectionListener#reconnectingIn(int)
 	 */
-	@Override
 	public void reconnectingIn(int seconds) {
 	}
 
 	/* (non-Javadoc)
 	 * @see org.jivesoftware.smack.ConnectionListener#reconnectionSuccessful()
 	 */
-	@Override
 	public void reconnectionSuccessful() {
 		
 	}
@@ -74,7 +68,6 @@ public class ConnectionListener implements org.jivesoftware.smack.ConnectionList
 	/* (non-Javadoc)
 	 * @see org.jivesoftware.smack.ConnectionListener#reconnectionFailed(java.lang.Exception)
 	 */
-	@Override
 	public void reconnectionFailed(Exception e) {
 		LoggerUtils.error("xmpp reconnectionFailed");
 		LoggerUtils.logException(e);

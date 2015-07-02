@@ -25,7 +25,6 @@ public class JsonMapperImpl implements JsonMapper {
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.json.JsonMapper#init()
 	 */
-	@Override
 	@PostConstruct
 	public void init() {
 		mapper = new ObjectMapper();
@@ -40,7 +39,6 @@ public class JsonMapperImpl implements JsonMapper {
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.json.JsonMapper#toJson(java.lang.Object)
 	 */
-	@Override
 	public String toJson(Object object) throws Exception {
 		try {
 			return mapper.writeValueAsString(object);
@@ -53,7 +51,6 @@ public class JsonMapperImpl implements JsonMapper {
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.json.JsonMapper#fromJson(java.lang.String, java.lang.Class)
 	 */
-	@Override
 	public <T> T fromJson(String json, Class<T> objectClass) throws Exception {
 		if(StringUtils.isBlank(json)) {
 			return null;
@@ -85,7 +82,6 @@ public class JsonMapperImpl implements JsonMapper {
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.json.JsonMapper#destory()
 	 */
-	@Override
 	@PreDestroy
 	public void destory() {
 		mapper = null;

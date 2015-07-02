@@ -37,7 +37,6 @@ public class AuthorityDAOImpl extends BaseDAOImpl implements AuthorityDAO {
 	/* (non-Javadoc)
 	 * @see com.lmiky.admin.authority.dao.AuthorityDAO#listUnauthorizedOperator(java.lang.String)
 	 */
-	@Override
 	public List<Role> listUnauthorizedOperator(String modulePath) throws DatabaseException {
 		try {
 			Map<String, Object> params = generateParameterMap(LatelyOperateMenu.class);
@@ -51,7 +50,6 @@ public class AuthorityDAOImpl extends BaseDAOImpl implements AuthorityDAO {
 	/* (non-Javadoc)
 	 * @see com.lmiky.admin.authority.dao.AuthorityDAO#checkAuthority(java.lang.String, java.lang.Long)
 	 */
-	@Override
 	public boolean checkAuthority(String authorityCode, Long userId) throws ServiceException {
 		try {
 			Map<String, Object> params = generateParameterMap(LatelyOperateMenu.class);

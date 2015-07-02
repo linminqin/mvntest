@@ -208,7 +208,6 @@ public class BaseServiceImpl implements BaseService {
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#update(java.lang.Class, java.util.Map, java.util.Map)
 	 */
-	@Override
 	@Transactional(rollbackFor={Exception.class})
 	public <T extends BasePojo> boolean update(Class<T> pojoClass, Map<String, Object> condition, Map<String, Object> updateValue) throws ServiceException {
 		try {
@@ -221,7 +220,6 @@ public class BaseServiceImpl implements BaseService {
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#update(java.lang.Class, java.lang.String, java.lang.Object, java.lang.String, java.lang.Object)
 	 */
-	@Override
 	@Transactional(rollbackFor={Exception.class})
 	public <T extends BasePojo> boolean update(Class<T> pojoClass, String conditionFieldName, Object conditionFieldValue, String updateFieldName, Object updateFieldValue) throws ServiceException {
 		try {
@@ -298,7 +296,6 @@ public class BaseServiceImpl implements BaseService {
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#delete(java.lang.Class, java.lang.String, java.lang.Object)
 	 */
-	@Override
 	@Transactional(rollbackFor={Exception.class})
 	public <T extends BasePojo> int delete(Class<T> pojoClass, String propertyName, Object propertyValue) throws ServiceException {
 		try {
@@ -373,7 +370,6 @@ public class BaseServiceImpl implements BaseService {
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#list(java.lang.Class, com.lmiky.platform.database.model.Sort)
 	 */
-	@Override
 	public <T extends BasePojo> List<T> list(Class<T> pojoClass, Sort sort) throws ServiceException {
 		try {
 			return getDAO().list(pojoClass,  sort);
@@ -397,7 +393,6 @@ public class BaseServiceImpl implements BaseService {
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#list(java.lang.Class, java.util.List)
 	 */
-	@Override
 	public <T extends BasePojo> List<T> list(Class<T> pojoClass, List<Sort> sorts) throws ServiceException {
 		try {
 			return getDAO().list(pojoClass,  sorts);

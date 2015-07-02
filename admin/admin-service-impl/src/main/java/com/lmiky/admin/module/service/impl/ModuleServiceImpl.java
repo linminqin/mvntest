@@ -25,7 +25,6 @@ public class ModuleServiceImpl extends BaseServiceImpl implements ModuleService 
 	/* (non-Javadoc)
 	 * @see com.lmiky.admin.module.service.ModuleService#listFunctionByModulePath(java.lang.String, java.lang.String)
 	 */
-	@Override
 	@Transactional(readOnly=true)
 	public List<Function> listFunctionByModulePath(String modulePath, String moduleType) throws ServiceException {
 		List<Function> functions = new ArrayList<Function>();

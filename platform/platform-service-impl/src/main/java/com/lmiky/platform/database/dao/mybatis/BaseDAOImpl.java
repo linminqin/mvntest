@@ -478,7 +478,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#find(java.lang.Class, java.lang.Long)
 	 */
-	@Override
 	public <T extends BasePojo> T find(Class<T> pojoClass, Long id) throws DatabaseException {
 		try {
 			PropertyFilter propertyFilter = new PropertyFilter();
@@ -554,7 +553,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#save(com.lmiky.platform.database.pojo.BasePojo)
 	 */
-	@Override
 	public <T extends BasePojo> void save(T pojo) throws DatabaseException {
 		try {
 			if (pojo.getId() == null) {
@@ -571,7 +569,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#save(java.util.List)
 	 */
-	@Override
 	public <T extends BasePojo> void save(List<T> pojos) throws DatabaseException {
 		try {
 			for (T pojo : pojos) {
@@ -586,7 +583,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#add(com.lmiky.platform.database.pojo.BasePojo)
 	 */
-	@Override
 	public <T extends BasePojo> void add(T pojo) throws DatabaseException {
 		try {
 			List<Class<?>> classList = listPojoExecuteClass(pojo.getClass(), SQLNAME_ADD);
@@ -602,7 +598,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#add(java.util.List)
 	 */
-	@Override
 	public <T extends BasePojo> void add(List<T> pojos) throws DatabaseException {
 		try {
 			for (T pojo : pojos) {
@@ -617,7 +612,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#update(com.lmiky.platform.database.pojo.BasePojo)
 	 */
-	@Override
 	public <T extends BasePojo> void update(T pojo) throws DatabaseException {
 		try {
 			List<Class<?>> classList = listPojoExecuteClass(pojo.getClass(), SQLNAME_UPDATE);
@@ -633,7 +627,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#update(java.util.List)
 	 */
-	@Override
 	public <T extends BasePojo> void update(List<T> pojos) throws DatabaseException {
 		try {
 			for (T pojo : pojos) {
@@ -648,7 +641,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#update(java.lang.Class, java.lang.Long, java.lang.String, java.lang.Object)
 	 */
-	@Override
 	public <T extends BasePojo> boolean update(Class<T> pojoClass, Long id, String propertyName, Object propertyValue) throws DatabaseException {
 		try {
 			Map<String, Object> params = new HashMap<String, Object>();
@@ -663,7 +655,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#update(java.lang.Class, java.lang.Long, java.util.Map)
 	 */
-	@Override
 	public <T extends BasePojo> boolean update(Class<T> pojoClass, Long id, Map<String, Object> params) throws DatabaseException {
 		try {
 			Map<String, Object> condition = new HashMap<String, Object>();
@@ -678,7 +669,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#update(java.lang.Class, java.util.Map, java.util.Map)
 	 */
-	@Override
 	public <T extends BasePojo> boolean update(Class<T> pojoClass, Map<String, Object> condition, Map<String, Object> updateValue) throws DatabaseException {
 		try {
 			Map<String, Object> params = generateParameterMap(pojoClass);
@@ -694,7 +684,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#update(java.lang.Class, java.lang.String, java.lang.Object, java.lang.String, java.lang.Object)
 	 */
-	@Override
 	public <T extends BasePojo> boolean update(Class<T> pojoClass, String conditionFieldName, Object conditionFieldValue, String updateFieldName, Object updateFieldValue) throws DatabaseException {
 		try {
 			Map<String, Object> condition = new HashMap<String, Object>();
@@ -725,7 +714,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#delete(com.lmiky.platform.database.pojo.BasePojo)
 	 */
-	@Override
 	public <T extends BasePojo> void delete(T pojo) throws DatabaseException {
 		try {
 			delete(getExecutePojoClass(pojo), pojo.getId());
@@ -738,7 +726,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#delete(java.util.List)
 	 */
-	@Override
 	public <T extends BasePojo> void delete(List<T> pojos) throws DatabaseException {
 		try {
 			if (pojos.isEmpty()) {
@@ -758,7 +745,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#delete(java.lang.Class, java.lang.Long)
 	 */
-	@Override
 	public <T extends BasePojo> void delete(Class<T> pojoClass, Long id) throws DatabaseException {
 		try {
 			PropertyFilter propertyFilter = new PropertyFilter();
@@ -776,7 +762,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#delete(java.lang.Class, java.lang.Long[])
 	 */
-	@Override
 	public <T extends BasePojo> void delete(Class<T> pojoClass, Long[] ids) throws DatabaseException {
 		try {
 			Map<String, Object> params = new HashMap<String, Object>();
@@ -792,7 +777,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#delete(java.lang.Class, java.lang.String, java.lang.Object)
 	 */
-	@Override
 	public <T extends BasePojo> int delete(Class<T> pojoClass, String propertyName, Object propertyValue) throws DatabaseException {
 		try {
 			PropertyFilter propertyFilter = new PropertyFilter();
@@ -810,7 +794,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#delete(java.lang.Class, java.util.List)
 	 */
-	@Override
 	public <T extends BasePojo> int delete(Class<T> pojoClass, List<PropertyFilter> propertyFilters) throws DatabaseException {
 		try {
 			Map<String, Object> params = generateParameterMap(pojoClass, propertyFilters);
@@ -824,7 +807,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#delete(java.lang.Class, com.lmiky.platform.database.model.PropertyFilter[])
 	 */
-	@Override
 	public <T extends BasePojo> int delete(Class<T> pojoClass, PropertyFilter... propertyFilters) throws DatabaseException {
 		try {
 			return delete(pojoClass, Arrays.asList(propertyFilters));
@@ -837,7 +819,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#list(java.lang.Class)
 	 */
-	@Override
 	public <T extends BasePojo> List<T> list(Class<T> pojoClass) throws DatabaseException {
 		try {
 			return list(pojoClass, 0, Integer.MAX_VALUE);
@@ -849,7 +830,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#list(java.lang.Class, java.lang.String, java.lang.Object)
 	 */
-	@Override
 	public <T extends BasePojo> List<T> list(Class<T> pojoClass, String propertyName, Object propertyValue) throws DatabaseException {
 		try {
 			return list(pojoClass, new PropertyFilter(propertyName, propertyValue, pojoClass));
@@ -861,7 +841,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#list(java.lang.Class, java.util.Map)
 	 */
-	@Override
 	public <T extends BasePojo> List<T> list(Class<T> pojoClass, Map<String, Object> params) throws DatabaseException {
 		try {
 			PropertyFilter[] propertyFilters = new PropertyFilter[params.size()];
@@ -880,7 +859,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#list(java.lang.Class, com.lmiky.platform.database.model.Sort)
 	 */
-	@Override
 	public <T extends BasePojo> List<T> list(Class<T> pojoClass, Sort sort) throws DatabaseException {
 		try {
 			List<Sort> sorts = new ArrayList<Sort>();
@@ -897,7 +875,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#list(java.lang.Class, com.lmiky.platform.database.model.PropertyFilter, com.lmiky.platform.database.model.Sort)
 	 */
-	@Override
 	public <T extends BasePojo> List<T> list(Class<T> pojoClass, PropertyFilter propertyFilter, Sort sort) throws DatabaseException {
 		try {
 			List<PropertyFilter> propertyFilters = new ArrayList<PropertyFilter>();
@@ -918,7 +895,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#list(java.lang.Class, java.util.List)
 	 */
-	@Override
 	public <T extends BasePojo> List<T> list(Class<T> pojoClass, List<Sort> sorts) throws DatabaseException {
 		try {
 			return list(pojoClass, new ArrayList<PropertyFilter>(), sorts);
@@ -931,7 +907,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#list(java.lang.Class, java.util.List, java.util.List)
 	 */
-	@Override
 	public <T extends BasePojo> List<T> list(Class<T> pojoClass, List<PropertyFilter> propertyFilters, List<Sort> sorts) throws DatabaseException {
 		try {
 			return list(pojoClass, propertyFilters, sorts, 0, Integer.MAX_VALUE);
@@ -944,7 +919,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#list(java.lang.Class, com.lmiky.platform.database.model.PropertyFilter[])
 	 */
-	@Override
 	public <T extends BasePojo> List<T> list(Class<T> pojoClass, PropertyFilter... propertyFilters) throws DatabaseException {
 		try {
 			return list(pojoClass, 0, Integer.MAX_VALUE, propertyFilters);
@@ -957,7 +931,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#list(java.lang.Class, com.lmiky.platform.database.model.Sort[])
 	 */
-	@Override
 	public <T extends BasePojo> List<T> list(Class<T> pojoClass, Sort... sorts) throws DatabaseException {
 		try {
 			return list(pojoClass, 0, Integer.MAX_VALUE, sorts);
@@ -970,7 +943,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#list(java.lang.Class, int, int)
 	 */
-	@Override
 	public <T extends BasePojo> List<T> list(Class<T> pojoClass, int pageFirst, int pageSize) throws DatabaseException {
 		try {
 			return list(pojoClass, null, null, pageFirst, pageSize);
@@ -983,7 +955,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#list(java.lang.Class, java.util.List, java.util.List, int, int)
 	 */
-	@Override
 	public <T extends BasePojo> List<T> list(Class<T> pojoClass, List<PropertyFilter> propertyFilters, List<Sort> sorts, int pageFirst, int pageSize) throws DatabaseException {
 		try {
 			Map<String, Object> params = generateParameterMap(pojoClass, propertyFilters, sorts);
@@ -999,7 +970,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#list(java.lang.Class, int, int, com.lmiky.platform.database.model.PropertyFilter[])
 	 */
-	@Override
 	public <T extends BasePojo> List<T> list(Class<T> pojoClass, int pageFirst, int pageSize, PropertyFilter... propertyFilters) throws DatabaseException {
 		try {
 			return list(pojoClass, Arrays.asList(propertyFilters), null, pageFirst, pageSize);
@@ -1012,7 +982,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#list(java.lang.Class, int, int, com.lmiky.platform.database.model.Sort[])
 	 */
-	@Override
 	public <T extends BasePojo> List<T> list(Class<T> pojoClass, int pageFirst, int pageSize, Sort... sorts) throws DatabaseException {
 		try {
 			return list(pojoClass, null, Arrays.asList(sorts), pageFirst, pageSize);
@@ -1025,7 +994,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#count(java.lang.Class)
 	 */
-	@Override
 	public <T extends BasePojo> int count(Class<T> pojoClass) throws DatabaseException {
 		try {
 			return count(pojoClass, new ArrayList<PropertyFilter>());
@@ -1038,7 +1006,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#count(java.lang.Class, java.util.List)
 	 */
-	@Override
 	public <T extends BasePojo> int count(Class<T> pojoClass, List<PropertyFilter> propertyFilters) throws DatabaseException {
 		try {
 			Map<String, Object> params = generateParameterMap(pojoClass, propertyFilters);
@@ -1052,7 +1019,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#count(java.lang.Class, java.lang.String, java.lang.Object)
 	 */
-	@Override
 	public <T extends BasePojo> int count(Class<T> pojoClass, String propertyName, Object propertyValue) throws DatabaseException {
 		try {
 			PropertyFilter propertyFilter = new PropertyFilter();
@@ -1070,7 +1036,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#count(java.lang.Class, com.lmiky.platform.database.model.PropertyFilter[])
 	 */
-	@Override
 	public <T extends BasePojo> int count(Class<T> pojoClass, PropertyFilter... propertyFilters) throws DatabaseException {
 		try {
 			return count(pojoClass, Arrays.asList(propertyFilters));
@@ -1082,7 +1047,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#count(java.lang.Class, java.util.Map)
 	 */
-	@Override
 	public <T extends BasePojo> int count(Class<T> pojoClass, Map<String, Object> params) throws DatabaseException {
 		try {
 			List<PropertyFilter> propertyFilters = new ArrayList<PropertyFilter>();
@@ -1100,7 +1064,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#exist(java.lang.Class, java.util.List)
 	 */
-	@Override
 	public <T extends BasePojo> boolean exist(Class<T> pojoClass, List<PropertyFilter> propertyFilters) throws DatabaseException {
 		try {
 			return count(pojoClass, propertyFilters) > 0;
@@ -1113,7 +1076,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#exist(java.lang.Class, com.lmiky.platform.database.model.PropertyFilter[])
 	 */
-	@Override
 	public <T extends BasePojo> boolean exist(Class<T> pojoClass, PropertyFilter... propertyFilters) throws DatabaseException {
 		try {
 			return exist(pojoClass, Arrays.asList(propertyFilters));
@@ -1126,7 +1088,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#exist(java.lang.Class, java.lang.String, java.lang.Object)
 	 */
-	@Override
 	public <T extends BasePojo> boolean exist(Class<T> pojoClass, String propertyName, Object propertyValue) throws DatabaseException {
 		try {
 			PropertyFilter propertyFilter = new PropertyFilter();
@@ -1143,7 +1104,6 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#exist(java.lang.Class, java.util.Map)
 	 */
-	@Override
 	public <T extends BasePojo> boolean exist(Class<T> pojoClass, Map<String, Object> params) throws DatabaseException {
 		try {
 			List<PropertyFilter> propertyFilters = new ArrayList<PropertyFilter>();

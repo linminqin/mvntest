@@ -25,7 +25,6 @@ public class MenuDAOImpl extends BaseDAOImpl implements MenuDAO {
 	 * (non-Javadoc)
 	 * @see com.lmiky.admin.system.menu.dao.MenuDAO#listLatelyOperateMenuId(java.lang.Long, int)
 	 */
-	@Override
 	public List<String> listLatelyOperateMenuId(Long userId, int size) throws DatabaseException {
 		try {
 			Map<String, Object> params = generateParameterMap(LatelyOperateMenu.class);
@@ -41,7 +40,6 @@ public class MenuDAOImpl extends BaseDAOImpl implements MenuDAO {
 	/* (non-Javadoc)
 	 * @see com.lmiky.admin.system.menu.dao.MenuDAO#listFavoriteMenuId(java.lang.Long)
 	 */
-	@Override
 	public List<String> listFavoriteMenuId(Long userId) throws DatabaseException {
 		try {
 			Map<String, Object> params = generateParameterMap(MyFavoriteMenu.class);

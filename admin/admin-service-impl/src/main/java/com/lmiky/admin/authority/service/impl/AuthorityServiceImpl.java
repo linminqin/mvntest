@@ -31,7 +31,6 @@ public class AuthorityServiceImpl implements AuthorityService {
 	/* (non-Javadoc)
 	 * @see com.lmiky.admin.authority.service.AuthorityService#listAuthorizedOperator(java.lang.String)
 	 */
-	@Override
 	@Transactional(readOnly = true)
 	public List<Role> listAuthorizedOperator(String modulePath) throws ServiceException {
 		try {
@@ -44,7 +43,6 @@ public class AuthorityServiceImpl implements AuthorityService {
 	/* (non-Javadoc)
 	 * @see com.lmiky.admin.authority.service.AuthorityService#listUnauthorizedOperator(java.lang.String)
 	 */
-	@Override
 	@Transactional(readOnly = true)
 	public List<Role> listUnauthorizedOperator(String modulePath) throws ServiceException {
 		try {
@@ -57,7 +55,6 @@ public class AuthorityServiceImpl implements AuthorityService {
 	/* (non-Javadoc)
 	 * @see com.lmiky.admin.authority.service.AuthorityService#authorize(java.lang.String, java.util.List)
 	 */
-	@Override
 	@Transactional(rollbackFor = { Exception.class })
 	public void authorize(String modulePath, String moduleType, String[] operatorIds) throws ServiceException {
 		try {

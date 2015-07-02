@@ -27,7 +27,6 @@ public class RedisOperatorImpl implements RedisOperator {
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.redis.RedisOperator#hget(java.lang.String, java.lang.String)
 	 */
-	@Override
 	public Object hget(String key, String field) {
 		return redisTemplate.boundHashOps(key).get(field);
 	}
@@ -35,7 +34,6 @@ public class RedisOperatorImpl implements RedisOperator {
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.redis.RedisOperator#hgetAll(java.lang.String)
 	 */
-	@Override
 	public Map<Object, Object> hgetAll(String key) {
 		return redisTemplate.boundHashOps(key).entries();
 	}
@@ -43,7 +41,6 @@ public class RedisOperatorImpl implements RedisOperator {
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.redis.RedisOperator#hdel(java.lang.String, java.lang.String)
 	 */
-	@Override
 	public void hdel(String key, String field) {
 		redisTemplate.boundHashOps(key).delete(field);
 		

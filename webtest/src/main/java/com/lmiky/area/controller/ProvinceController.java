@@ -25,7 +25,7 @@ public class ProvinceController extends BaseAreaController<Province> {
 	 */
 	@Override
 	protected String getAddAuthorityCode(ModelMap modelMap, HttpServletRequest request) {
-		return "admin_area_manage";
+		return "area_manage";
 	}
 
 	/* (non-Javadoc)
@@ -33,7 +33,7 @@ public class ProvinceController extends BaseAreaController<Province> {
 	 */
 	@Override
 	protected String getModifyAuthorityCode(ModelMap modelMap, HttpServletRequest request) {
-		return "admin_area_manage";
+		return "area_manage";
 	}
 
 	/* (non-Javadoc)
@@ -41,7 +41,7 @@ public class ProvinceController extends BaseAreaController<Province> {
 	 */
 	@Override
 	protected String getDeleteAuthorityCode(ModelMap modelMap, HttpServletRequest request) {
-		return "admin_area_manage";
+		return "area_manage";
 	}
 
 	/* (non-Javadoc)
@@ -49,7 +49,7 @@ public class ProvinceController extends BaseAreaController<Province> {
 	 */
 	@Override
 	protected String getLoadAuthorityCode(ModelMap modelMap, HttpServletRequest request) {
-		return "admin_area_manage";
+		return "area_manage";
 	}
 
 	/**

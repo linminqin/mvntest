@@ -31,15 +31,15 @@ public class Environment {
 		int index = path.toUpperCase().lastIndexOf(WEBINF_NAME + "/");
 		if(index != -1) {
 			webAppPath = path.substring(0, index);
+		} else {
+			webAppPath = path;
 		}
 		webAppPath = webAppPath.replaceAll("%20", " ") + WEBINF_NAME + "/";
-		try {
-			index = path.toUpperCase().lastIndexOf(CLASSPATH_NAME + "/");
-			if(index != -1) {
-				classPath = path.substring(0, index);
-			}
+		index = path.lastIndexOf(CLASSPATH_NAME + "/");
+		if(index != -1) {
+			classPath = path.substring(0, index);
 			classPath = classPath.replaceAll("%20", " ") + CLASSPATH_NAME + "/";
-		} catch(Exception e) {
+		} else {
 			classPath = webAppPath + CLASSPATH_NAME + "/";
 		}
 	}
