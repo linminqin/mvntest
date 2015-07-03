@@ -36,6 +36,8 @@ public class KindEditorFileController extends BaseWebController {
 	//结果码
 	public static final int VALUE_NAME_ERROR_SUCCESS = 0;
 	public static final int VALUE_NAME_ERROR_ERROR = 1;
+	
+	private static final String SYSTEM_FILE_PATH = BundleUtils.getStringContextValue("system.file.path");
 
 	/**
 	 * 上传文件
@@ -52,7 +54,7 @@ public class KindEditorFileController extends BaseWebController {
 	public void upload(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
-			String filePath = FileUtils.upload(modelMap, request, response, PARAM_FIELDNAME_FILE, BundleUtils.getStringContextValue("system.file.path"));
+			String filePath = FileUtils.upload(modelMap, request, response, PARAM_FIELDNAME_FILE, SYSTEM_FILE_PATH);
 			result.put(KEY_NAME_ERROR, VALUE_NAME_ERROR_SUCCESS);
 			result.put(KEY_NAME_MESSAGE, "上传成功！");
 			result.put(KEY_NAME_FILE_URL, request.getContextPath() + filePath);
@@ -63,7 +65,4 @@ public class KindEditorFileController extends BaseWebController {
 		}
 		ResponseUtils.write(response, JsonUtils.toJson(result));
 	}
-	
-	
-	
 }
