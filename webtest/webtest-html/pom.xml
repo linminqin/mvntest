@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>webtest-html</artifactId>
+	<packaging>war</packaging>
+	<parent>
+		<groupId>com.lmiky.test</groupId>
+		<artifactId>webtest</artifactId>
+		<version>0.1</version>
+	</parent>
+
+	<dependencies>
+		<!-- admin -->
+		<dependency>
+			<groupId>com.lmiky</groupId>
+			<artifactId>admin-html</artifactId>
+			<version>0.1</version>
+		</dependency>
+		
+		<!-- admin -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>webtest-web</artifactId>
+			<version>0.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>webtest-service-impl</artifactId>
+			<version>0.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.lmiky</groupId>
+			<artifactId>admin-html</artifactId>
+			<version>0.1</version>
+			<type>war</type>
+		</dependency>
+		
+		<!-- Servlet -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources/</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
+		</resources>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<webResources>
+						<resource>
+							<!-- this is relative to the pom.xml directory -->
+							<directory>webapp</directory>
+						</resource>
+					</webResources>
+					<overlays>
+						<overlay>
+							<groupId>com.lmiky</groupId>
+							<artifactId>admin-html</artifactId>
+							<targetPath></targetPath>
+						</overlay>
+					</overlays>
+					<dependentWarExcludes>WEB-INF/web.xml,WEB-INF/lib/*,WEB-INF/classes/**/*,WEB-INF/tld/*</dependentWarExcludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
